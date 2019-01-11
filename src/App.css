@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -29,4 +29,38 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.bg-light {
+  background-color: #000000 !important;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+}
+
+.nav-link {
+  color: #FFFFFF !important;
+  font-size: 18px !important;
+  font-family: 'Thasadith', sans-serif;
+}
+
+.nav-link:hover {
+  color: #FA7268 !important;
+}
+
+.navbar-brand {
+  color: #FA7268 !important;
+}
+.LeftPanel {
+  border: 1px blue solid;
+  float: left;
+  width : 50%;
+  height: 100%;
+}
+.RightPanel {
+  border: 1px blue solid;
+  float: left;
+  width : 50%;
+  height: 200px;
 }
