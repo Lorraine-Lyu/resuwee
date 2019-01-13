@@ -30,7 +30,9 @@
     transform: rotate(360deg);
   }
 } */
-
+.topNav {
+  height: 59px;
+}
 .bg-light {
   background-color: #000000 !important;
 }
@@ -42,11 +44,18 @@
 .nav-link {
   color: #FFFFFF !important;
   font-size: 18px !important;
+  padding-top: 21px;
+  padding-bottom: 11px;
   font-family: 'Thasadith', sans-serif;
 }
 
 .nav-link:hover {
+  text-align: center;
+  padding-top: 21px;
+  height: 60px;
+  padding-bottom: 8px;
   color: #FA7268 !important;
+  border-bottom: 3px #FA7268 solid;
 }
 
 .navbar-brand {
@@ -62,5 +71,23 @@
   border: 1px blue solid;
   float: left;
   width : 50%;
-  height: 200px;
+  height: 100%;
+}
+
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  border-color: #FA7268;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

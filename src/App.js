@@ -33,9 +33,14 @@ class LeftPanel extends Component {
     super(props);
   }
 
+  expand() {
+
+  }
+
   render() {
     return(
       <div className = "LeftPanel">
+          <CollapseBtn  direction = "right"/>
           <p>Here is the left panel</p>
       </div>
     )
@@ -50,10 +55,32 @@ class RightPanel extends Component {
   render() {
     return(
       <div className = "RightPanel">
+          <CollapseBtn  direction = "left" />
           <p>Here is the Right Panel</p>
       </div>
     )
   }
+}
+
+class CollapseBtn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: false,
+      fullScreen: false,
+    }
+  }
+
+  // hideBtn() {
+  //
+  // }
+
+  render() {
+    // console.log(this.props.direction);
+    return(
+      this.props.direction == "right" ? (<i className="right" />) : (<i className="left"/>)
+    )
+      }
 }
 
 class NavBar extends React.Component {
@@ -115,10 +142,5 @@ class NavBar extends React.Component {
   }
 }
 
-class NavBarUnit extends Component {
-    render() {
-        return (<p>...</p>)
-    }
-}
 
 export default App;
