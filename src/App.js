@@ -111,7 +111,8 @@ class CollapseBtn extends Component {
 
 
 class contact{
-  constructor(name ,link){
+  constructor(index, name ,link){
+    this.index = index;
     this.name = name;
     this.link = link;
   }
@@ -123,11 +124,13 @@ class ContactList extends Component {
     super(props);
     this.expand = this.expand.bind(this);
     this.add = this.add.bind(this);
-    var c = new contact('other', 'None');
+    this.update = this.update.bind(this);
+    var c = new contact(1, 'other', 'None');
     this.state = {
       isOpen: true,
       menu :['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'],
       info : [c],
+      count : 1,
     };
   }
 
@@ -138,26 +141,25 @@ class ContactList extends Component {
   }
 
   add(){
-    const newContact= new contact('other', 'None');
+    const newContact= new contact(this.state.count+1,'other', 'None');
     const nlst = this.state.info;
     nlst.push(newContact);
     this.setState({
-      info : nlst
+      info : nlst,
+      count:this.state.count+1,
     });
+  }
+
+  update(key,value){
+    if(key == null) {
+
+    }
   }
 
   render(){
     const contacts = this.state.info;
-    const allOptions = this.state.menu;
-    const options = allOptions.map((option)=>
-      <option value={option}>{option}</option>
-  );
-    const select = <select name='contactMethods'>{options}</select>
     const input = contacts.map((contact)=>
-      <div className="contactUnit">
-        {select}
-        link: <input type="text" className="contactInput"></input>
-      </div>
+      <ContactUnit menu={this.state.menu} key={contact.index} value={contact} callBk={this.update}></ContactUnit>
   );
 
     if(!this.state.isOpen) {
@@ -172,7 +174,7 @@ class ContactList extends Component {
       <div>
         <div className="openedContactTitle">
           <p>Contact</p>
-          {select}
+          {input}
           <button className="addBtn" onClick={this.add}>add</button>
           <button className="expandBtn" onClick={this.expand}>Collapse</button>
         </div>
@@ -187,14 +189,22 @@ class ContactUnit extends Component{
   }
   render(){
     const allOptions = this.props.menu;
-    const options = allOptions.map((option)=>
-      <option value={option}>{option}</option>
+    const curr = this.props.key;
+    const update = this.props.callBk;
+    const options = allOptions.map(function(option,curr,update){
+      if (option == curr) {
+        return <option value={option} selected >{option}</option>
+      } else {
+        return <option value={option}>{option}</option>
+      }
+    }
+
   );
-    const select = <select name='contactMethods'>{options}</select>
+    const select = <select name='contactMethods' onChange={update(curr, 'n', this.value)}>{options}</select>
     return (
-      <div className="contactUnit">
+      <div className="contactUnit" >
         {select}
-        link: <input type="text" className="contactInput"></input>
+        link: <input type="text" className="contactInput" onChange={update(curr, 'l', this.value)}></input>
       </div>
     )
   }
