@@ -71,7 +71,7 @@
   resize: horizontal;
   overflow: auto;
   min-width: 300px;
-  
+
 }
 .RightPanel {
   width : 50%;
@@ -134,6 +134,10 @@ i {
 .expanded {
   width:100%;
   height: 600px;
+  border: 1px black solid;
+}
+
+.ContactList {
   border: 1px black solid;
 }
 

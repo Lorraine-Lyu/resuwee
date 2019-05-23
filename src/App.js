@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
-import './util.js';
+import {contact, user, education} from './util.js';
 
 import {
   Collapse,
@@ -17,13 +17,15 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-
 class App extends Component {
   constructor(props){
     super(props);
+    var u = new user("Tim", "32");
+    this.binded = this.expandRight.bind(this);
     this.state = {
       rightIsExpanded: false,
       content: "This is the collapsed right panel",
+      user: u,
     };
 
   }
@@ -31,22 +33,24 @@ class App extends Component {
     console.log(this.state.rightIsExpanded);
     this.setState({rightIsExpanded:!this.state.rightIsExpanded});
   };
-  binded = this.expandRight.bind(this);
+
+
   render() {
+    // console.log(this.state.user);
       const newContent = "This is the expanded right panel";
       if(this.state.rightIsExpanded){
         const styleDiv = styled(RightPanel)`width:100%`;
         return(
         <div>
           <NavBar />
-          <RightPanel className = "expanded" content = {newContent} expandRight = {this.binded} direction = "right" />
+          <RightPanel className = "expanded" content = {newContent} profile={this.state.user} expandRight = {this.binded} direction = "right" />
         </div>);
       } else{
         return(
         <div>
           <NavBar />
-          <LeftPanel className = "LeftPanel"/>
-          <RightPanel className = "RightPanel" content = {this.state.content} expandRight = {this.binded} direction = "left"/>
+          <LeftPanel className = "LeftPanel" profile={this.state.user}/>
+          <RightPanel className = "RightPanel" content = {this.state.content} profile={this.state.user} expandRight = {this.binded} direction = "left"/>
         </div>);
       }
 
@@ -59,11 +63,13 @@ class LeftPanel extends Component {
   }
 
   render() {
+    console.log(this.props.profile);
     return(
+
       <div className = "LeftPanel">
           <div className = "Personal Info">
-            Name: <input type="text" name="name"></input><br></br>
-            Birth Date: <input type="text" name="birth date"></input><br></br>
+            Name: <input type="text" name="name" value={this.props.profile.name}></input><br></br>
+          Birth Date: <input type="text" name="birth date" value={this.props.profile.age}></input><br></br>
             <ContactList className="ContactList"></ContactList>
             Education: <input type="text" name="education"></input><br></br>
             Work Experience: <input type="text" name="work experience"></input><br></br>
@@ -103,21 +109,11 @@ class CollapseBtn extends Component {
     // console.log(this.props.direction);
     return(
       <button className={"triangle-" + this.props.direction} onClick = {()=>this.props.expandRight()}>
-        {this.props.direction == "right" ? (<i className="right" />) : (<i className="left"/>)}
+        {this.props.direction === "right" ? (<i className="right" />) : (<i className="left"/>)}
       </button>
     )
       }
 }
-
-
-class contact{
-  constructor(index, name ,link){
-    this.index = index;
-    this.name = name;
-    this.link = link;
-  }
-}
-
 
 class ContactList extends Component {
   constructor(props) {
@@ -150,16 +146,28 @@ class ContactList extends Component {
     });
   }
 
-  update(key,value){
-    if(key == null) {
-
+  update(index,type,value){
+    const lst = this.state.info;
+    console.log(index);
+    var c;
+      for (c of lst) {
+        if (c.index === index) {
+          if(type ===  'n') {
+            c.name = value;
+          } else {
+            c.value = value;
+          }
+        }
+      }
     }
-  }
+
+
+
 
   render(){
     const contacts = this.state.info;
     const input = contacts.map((contact)=>
-      <ContactUnit menu={this.state.menu} key={contact.index} value={contact} callBk={this.update}></ContactUnit>
+      <ContactUnit menu={this.state.menu} key={contact.index+'unit'} value={contact} callBk={this.update}></ContactUnit>
   );
 
     if(!this.state.isOpen) {
@@ -175,7 +183,7 @@ class ContactList extends Component {
         <div className="openedContactTitle">
           <p>Contact</p>
           {input}
-          <button className="addBtn" onClick={this.add}>add</button>
+          <button className="addBtn" onClick={this.add}>Add</button>
           <button className="expandBtn" onClick={this.expand}>Collapse</button>
         </div>
       </div>
@@ -189,22 +197,23 @@ class ContactUnit extends Component{
   }
   render(){
     const allOptions = this.props.menu;
-    const curr = this.props.key;
+    const curr = this.props.value.index;
     const update = this.props.callBk;
     const options = allOptions.map(function(option,curr,update){
-      if (option == curr) {
-        return <option value={option} selected >{option}</option>
+      if (option === curr) {
+        return <option value={option} key={curr} selected >{option}</option>
       } else {
-        return <option value={option}>{option}</option>
+        return <option value={option} key={curr}>{option}</option>
       }
     }
 
   );
-    const select = <select name='contactMethods' onChange={update(curr, 'n', this.value)}>{options}</select>
+    console.log(curr);
+    const select = <select name='contactMethods' key={curr+'select'} onChange={update(curr, 'n', this.value)}>{options}</select>
     return (
-      <div className="contactUnit" >
+      <div className="contactUnit" key={this.props.index+'div'}>
         {select}
-        link: <input type="text" className="contactInput" onChange={update(curr, 'l', this.value)}></input>
+        link: <input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'l', this.value)}></input>
       </div>
     )
   }
