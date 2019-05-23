@@ -4,6 +4,7 @@ import './App.css';
 import styled from 'styled-components';
 import {contact, user, education} from './util.js';
 
+
 import {
   Collapse,
   Navbar,
@@ -22,6 +23,7 @@ class App extends Component {
     super(props);
     var u = new user("Tim", "32");
     this.binded = this.expandRight.bind(this);
+    this.update = this.update.bind(this);
     this.state = {
       rightIsExpanded: false,
       content: "This is the collapsed right panel",
@@ -34,7 +36,19 @@ class App extends Component {
     this.setState({rightIsExpanded:!this.state.rightIsExpanded});
   };
 
+  update(event) {
+    if (event.target.name === 'name') {
+      var newUser = JSON.parse(JSON.stringify(this.state.user));
+      // console.log(event.target);
+      newUser.username = event.target.value;
+      // console.log(newUser);
+      this.setState({
+        user: newUser,
+      });
+      // console.log(this.state.user);
+    }
 
+  }
   render() {
     // console.log(this.state.user);
       const newContent = "This is the expanded right panel";
@@ -49,7 +63,7 @@ class App extends Component {
         return(
         <div>
           <NavBar />
-          <LeftPanel className = "LeftPanel" profile={this.state.user}/>
+          <LeftPanel className = "LeftPanel" profile={this.state.user} upd={this.update}/>
           <RightPanel className = "RightPanel" content = {this.state.content} profile={this.state.user} expandRight = {this.binded} direction = "left"/>
         </div>);
       }
@@ -63,13 +77,15 @@ class LeftPanel extends Component {
   }
 
   render() {
-    console.log(this.props.profile);
+    // console.log(this.props.profile);
+    var person = this.props.profile;
+    var update=this.props.upd;
     return(
 
       <div className = "LeftPanel">
           <div className = "Personal Info">
-            Name: <input type="text" name="name" value={this.props.profile.name}></input><br></br>
-          Birth Date: <input type="text" name="birth date" value={this.props.profile.age}></input><br></br>
+            Name: <input type="text" name="name" value={person.username} onChange={update}></input><br></br>
+          Birth Date: <input type="text" name="birth date" value={this.props.profile.age} onChange={update}></input><br></br>
             <ContactList className="ContactList"></ContactList>
             Education: <input type="text" name="education"></input><br></br>
             Work Experience: <input type="text" name="work experience"></input><br></br>
@@ -160,9 +176,6 @@ class ContactList extends Component {
         }
       }
     }
-
-
-
 
   render(){
     const contacts = this.state.info;

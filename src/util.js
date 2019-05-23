@@ -1,6 +1,6 @@
 export class user {
   constructor(name, age){
-    this.name= name;
+    this.username= name;
     this.age = age;
     this.contact= [new contact(1, 'other', 'none')];
     this.education=[new education('school name', 'year', 'field of study')];
