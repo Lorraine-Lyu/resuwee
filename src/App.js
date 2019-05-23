@@ -37,17 +37,14 @@ class App extends Component {
   };
 
   update(event) {
-    if (event.target.name === 'name') {
       var newUser = JSON.parse(JSON.stringify(this.state.user));
       // console.log(event.target);
-      newUser.username = event.target.value;
-      // console.log(newUser);
+      newUser[event.target.name] = event.target.value;
+      console.log(newUser);
       this.setState({
         user: newUser,
       });
       // console.log(this.state.user);
-    }
-
   }
   render() {
     // console.log(this.state.user);
@@ -84,8 +81,8 @@ class LeftPanel extends Component {
 
       <div className = "LeftPanel">
           <div className = "Personal Info">
-            Name: <input type="text" name="name" value={person.username} onChange={update}></input><br></br>
-          Birth Date: <input type="text" name="birth date" value={this.props.profile.age} onChange={update}></input><br></br>
+            Name: <input type="text" name="username" value={person.username} onChange={update}></input><br></br>
+          Birth Date: <input type="text" name="birth_date" value={person.birth_date} onChange={update}></input><br></br>
             <ContactList className="ContactList"></ContactList>
             Education: <input type="text" name="education"></input><br></br>
             Work Experience: <input type="text" name="work experience"></input><br></br>
