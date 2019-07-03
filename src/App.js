@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './style/App.css';
 import styled from 'styled-components';
 import {contact, user, education} from './util.js';
 
