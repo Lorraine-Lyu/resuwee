@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {contact} from './util';
+import { Button } from 'element-react';
+import 'element-theme-default';
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -83,7 +85,7 @@ class LeftPanel extends Component {
         return(
           <div className="closedContact">
             <p>Contact</p>
-            <button className="expandBtn" onClick={this.expand}>Expand</button>
+            <Button type="primary" onClick={this.expand}>Expand</Button>
           </div>
         )
       }
@@ -92,8 +94,8 @@ class LeftPanel extends Component {
           <div className="openedContactTitle">
             <p>Contact</p>
             {input}
-            <button className="addBtn" onClick={this.add}>Add</button>
-            <button className="expandBtn" onClick={this.expand}>Collapse</button>
+            <Button type="primary" onClick={this.add}>Add</Button>
+            <Button type="primary" onClick={this.expand}>Collapse</Button>
           </div>
         </div>
       )
