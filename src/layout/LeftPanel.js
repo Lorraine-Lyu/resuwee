@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {contact} from './util';
-import { Button } from 'element-react';
+import { Button, Form, Input, Select, DatePicker } from 'element-react';
 import 'element-theme-default';
 
 class LeftPanel extends Component {
@@ -15,18 +15,76 @@ class LeftPanel extends Component {
       return(
   
         <div className = "LeftPanel">
-            <div className = "Personal Info">
-              Name: <input type="text" name="username" value={person.username} onChange={update}></input><br></br>
-              Birth Date: <input type="text" name="birth_date" value={person.birth_date} onChange={update}></input><br></br>
-              <ContactList className="ContactList"></ContactList>
-              Education: <input type="text" name="education"></input><br></br>
-              Work Experience: <input type="text" name="work experience"></input><br></br>
-              projects: <input type="text" name="projects"></input><br></br>
-  
-            </div>
+            <InfoForm user={person}></InfoForm>
         </div>
       )
     }
+  }
+
+  class InfoForm extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        user : this.props.user,
+      }
+    }
+
+    onSubmit(e) {
+      e.preventDefault();
+    }
+
+    onChange(key, value) {
+      this.state.user[key] = value;
+      this.forceUpdate();
+    }
+
+    render() {
+      return (
+        <Form model={this.state.user} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
+          <Form.Item label="姓名 ">
+            <Input value={this.state.user.name} onChange={this.onChange.bind(this, 'name')}></Input>
+          </Form.Item>
+          <Form.Item label="所在地 ">
+            <Select value={this.state.user.region} placeholder="请选择活动区域">
+              <Select.Option label="区域一" value="shanghai"></Select.Option>
+              <Select.Option label="区域二" value="beijing"></Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="出生年月 ">
+              <Form.Item prop="date1" labelWidth="0px">
+                <DatePicker
+                  value={this.state.user.date}
+                  placeholder="选择日期"
+                  onChange={this.onChange.bind(this, 'date')}
+                />
+              </Form.Item>
+          </Form.Item>
+          <Form.Item label="学历 ">
+            <Select value={this.state.user.education} placeholder="请选择活动区域">
+              <Select.Option label="初中" value="初中"></Select.Option>
+              <Select.Option label="高中" value="高中"></Select.Option>
+              <Select.Option label="本科" value="本科"></Select.Option>
+              <Select.Option label="研究生" value="研究生"></Select.Option>
+              <Select.Option label="硕士" value="硕士"></Select.Option>
+              <Select.Option label="博士及以上" value="博士及以上"></Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="联系方式 ">
+            <ContactList></ContactList>
+          </Form.Item>
+          <Form.Item label="活动形式">
+            <Input type="textarea" value={this.state.user.desc} onChange={this.onChange.bind(this, 'desc')}></Input>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" nativeType="submit">立即创建</Button>
+            <Button>取消</Button>
+          </Form.Item>
+        </Form>
+      )
+    }
+    
+    
+
   }
 
   class ContactList extends Component {
@@ -62,7 +120,7 @@ class LeftPanel extends Component {
   
     update(index,type,value){
       const lst = this.state.info;
-      console.log(index);
+      // console.log(index);
       var c;
         for (c of lst) {
           if (c.index === index) {
@@ -84,18 +142,16 @@ class LeftPanel extends Component {
       if(!this.state.isOpen) {
         return(
           <div className="closedContact">
-            <p>Contact</p>
-            <Button type="primary" onClick={this.expand}>Expand</Button>
+            <Button type="primary small" onClick={this.expand}>Expand</Button>
           </div>
         )
       }
       return (
         <div>
           <div className="openedContactTitle">
-            <p>Contact</p>
             {input}
-            <Button type="primary" onClick={this.add}>Add</Button>
-            <Button type="primary" onClick={this.expand}>Collapse</Button>
+            <Button type="primary small" onClick={this.add}>Add</Button>
+            <Button type="primary small" onClick={this.expand}>Collapse</Button>
           </div>
         </div>
       )
@@ -112,19 +168,19 @@ class LeftPanel extends Component {
       const update = this.props.callBk;
       const options = allOptions.map(function(option,curr,update){
         if (option === curr) {
-          return <option value={option} key={curr} selected >{option}</option>
+          return <Select.Option value={option} key={curr} selected >{option}</Select.Option>
         } else {
-          return <option value={option} key={curr}>{option}</option>
+          return <Select.Option value={option} key={curr}>{option}</Select.Option>
         }
       }
   
     );
-      console.log(curr);
-      const select = <select name='contactMethods' key={curr+'select'} onChange={update(curr, 'n', this.value)}>{options}</select>
+      // console.log(curr);
+      const select = <Select name='contactMethods' key={curr+'select'} onChange={update(curr, 'n', this.value)}>{options}</Select>
       return (
         <div className="contactUnit" key={this.props.index+'div'}>
-          {select}
-          link: <input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'l', this.value)}></input>
+          {select} 
+          link: <Input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'l', this.value)}></Input>
         </div>
       )
     }

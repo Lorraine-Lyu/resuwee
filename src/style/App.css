@@ -62,39 +62,33 @@
   color: #FA7268 !important;
 }
 .LeftPanel {
-  width : 50%;
-  height: 600px;
-  margin:auto;
-  padding:auto;
+  margin:20px;
+  padding:10px;
   border: 1px black solid;
-  float: left;
   resize: horizontal;
   overflow: auto;
   min-width: 300px;
-
+  border-radius: 2px;
 }
 .RightPanel {
-  width : 50%;
-  height: 600px;
+  margin:20px;
+  padding:10px;
   border: 1px black solid;
-  float: left;
   resize: horizontal;
   overflow: auto;
   min-width: 300px;
-}
+  border-radius: 2px;
+} 
 
 p {
   height: 100%;
 }
 
-i {
+/* i {
   float:left;
-  border: solid black;
-  border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  border-color: #FA7268;
-}
+} */
 
 .right {
   margin:auto;
