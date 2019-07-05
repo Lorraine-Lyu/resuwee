@@ -1,9 +1,11 @@
 export class user {
-  constructor(name, age){
-    this.username= name;
-    this.birth_date = age;
-    this.contact= [new contact(1, 'other', 'none')];
-    this.education=[new education('school name', 'year', 'field of study')];
+  constructor(){
+    this.name= '';
+    this.date = null;
+    this.region = null;
+    this.contact= [new contact(1,null,null)];
+    this.education= ''
+    this.educationExperience = [new education(null, null, null)];
   }
 }
 

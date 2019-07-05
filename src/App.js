@@ -3,7 +3,7 @@ import logo from './assets/logo.svg';
 import './style/App.css';
 import styled from 'styled-components';
 import {user} from './layout/util';
-import LeftPanel from './layout/LeftPanel'
+import LeftPanel from './layout/leftPanel/LeftPanel'
 import RightPanel from './layout/RightPanel'
 import NavBar from './layout/NavBar'
 import { Layout } from 'element-react';
@@ -15,7 +15,7 @@ import 'element-theme-default';
 class App extends Component {
   constructor(props){
     super(props);
-    var u = new user("Tim", "32");
+    var u = new user();
     this.binded = this.expandRight.bind(this);
     this.update = this.update.bind(this);
     this.state = {
