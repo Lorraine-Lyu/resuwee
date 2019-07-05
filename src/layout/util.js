@@ -3,9 +3,9 @@ export class user {
     this.name= '';
     this.date = null;
     this.region = null;
-    this.contact= [new contact(1, 'other', 'none')];
+    this.contact= [new contact(1,null,null)];
     this.education= ''
-    this.educationExperience = [new education('school name', 'year', 'field of study')];
+    this.educationExperience = [new education(null, null, null)];
   }
 }
 

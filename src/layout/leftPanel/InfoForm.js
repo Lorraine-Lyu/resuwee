@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ContactList from './ContactList';
+import EducationInfo from './EducationInfo';
+import {contact, education} from '../util';
 import { Button, Form, Input, Select, DatePicker } from 'element-react';
 import 'element-theme-default';
 
@@ -53,8 +55,9 @@ import 'element-theme-default';
             </Select>
           </Form.Item>
           <Form.Item label="联系方式 ">
-            <ContactList></ContactList>
+            <ContactList parentContact={this.state.user.contact} parentUpdate={this}></ContactList>
           </Form.Item>
+          <EducationInfo parentEducation={this.state.user.educationExperience} parentUpdate={this}></EducationInfo>
           <Form.Item>
             <Button type="primary" nativeType="submit">立即创建</Button>
             <Button>取消</Button>

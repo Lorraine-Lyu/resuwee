@@ -9,11 +9,10 @@ import 'element-theme-default';
       this.expand = this.expand.bind(this);
       this.add = this.add.bind(this);
       this.update = this.update.bind(this);
-      var c = new contact(1, 'other', 'None');
       this.state = {
         isOpen: true,
         menu :['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'],
-        info : [c],
+        info : this.props.parentContact,
         count : 1,
       };
     }
@@ -40,7 +39,7 @@ import 'element-theme-default';
       var c;
         for (c of lst) {
           if (c.index === index) {
-            if(type ===  'n') {
+            if(type === 'type') {
               c.name = value;
             } else {
               c.value = value;
@@ -92,11 +91,11 @@ import 'element-theme-default';
   
     );
       // console.log(curr);
-      const select = <Select name='contactMethods' key={curr+'select'} onChange={update(curr, 'n', this.value)}>{options}</Select>
+      const select = <Select name='contactMethods' key={curr+'select'} onChange={update(curr, 'type', this.value)}>{options}</Select>
       return (
         <div className="contactUnit" key={this.props.index+'div'}>
           {select} 
-          link: <Input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'l', this.value)}></Input>
+          link: <Input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'value', this.value)}></Input>
         </div>
       )
     }
