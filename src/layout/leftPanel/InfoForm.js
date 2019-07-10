@@ -15,7 +15,7 @@ import 'element-theme-default';
 
     onSubmit(e) {
         console.log(this.state.user);
-      e.preventDefault();
+        e.preventDefault();
     }
 
     onChange(key, value) {
