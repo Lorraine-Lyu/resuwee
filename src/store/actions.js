@@ -3,6 +3,7 @@ export const EDIT_DATE = "EDIT DATE";
 export const EDIT_REGION = "EDIT REGION";
 export const EDIT_CONTACT = "EDIT CONTECT";
 export const EDIT_EDUCATION = "EDIT EDUCATION";
+export const EDIT_EDUCATION_INFO = "EDIT EDUCATION INFO";
 
 export function editName(text) {
     return {type: EDIT_NAME, text: text};
@@ -22,4 +23,8 @@ export function editEducation(text) {
 
 export function editContact(contact) {
     return {type: EDIT_CONTACT, contactObject:contact};
+}
+
+export function editEducationInfo(eduInfo) {
+    return {type:EDIT_EDUCATION_INFO, eduObject:eduInfo};
 }

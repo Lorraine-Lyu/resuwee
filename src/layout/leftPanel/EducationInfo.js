@@ -1,49 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import {education} from '../util';
 import { Button, Input, Select, Layout, Form} from 'element-react';
 import 'element-theme-default';
 
-class EducationInfo extends Component {
-    constructor(props) {
-      super(props);
-      this.expand = this.expand.bind(this);
-      this.add = this.add.bind(this);
-      this.state = {
-        isOpen: true,
-        lst: this.props.parentEducation,
-      }
-    }
+const EducationInfo = ({dispatch}) => {
+      var edu1 = new education(0);
+      const [isOpen, setIsOpen] = useState(true);
+      const [count, setCount] = useState(0);
+      const [eduLst, setEduLst] = useState([edu1])
 
-    expand(){
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
+      function switchState() {
+        setIsOpen(!isOpen);
       }
     
-      add(){
-        const newEdu= new education(this.state.count+1,'other', 'None');
-        const nlst = this.state.info;
+      function add() {
+        setCount(count+1);
+        const newEdu= new education(count);
+        var nlst = eduLst.slice();
         nlst.push(newEdu);
-        this.setState({
-          info : nlst,
-          count:this.state.count+1,
-        });
+        setEduLst(nlst)
       }
 
-    render() {
-        if(!this.state.isOpen) {
-            return(
-                <Button type="primary small" onClick={this.expand}>Expand</Button>
-            )
-        } else {
-            return(
-                <Form.Item label="学术经历 ">
-                    <Button type="primary small" onClick={this.add}>Add</Button>
-                    <Button type="primary small" onClick={this.expand}>Collapse</Button>
-                </Form.Item>
-            )
-        }
-    }
+      if(!isOpen) {
+          return(
+            <Form.Item label="学术经历 ">
+              <Button type="primary small" onClick={switchState}>Expand</Button>
+            </Form.Item>
+          )
+      } else {
+          return(
+              <Form.Item label="学术经历 ">
+                  <Button type="primary small" onClick={add}>Add</Button>
+                  <Button type="primary small" onClick={switchState}>Collapse</Button>
+              </Form.Item>
+          )
+      }
 }
 
 class EducationUnit extends Component {

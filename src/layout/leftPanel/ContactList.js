@@ -1,77 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, Component} from 'react';
 import {contact} from '../util';
 import { Button, Input, Select} from 'element-react';
 import 'element-theme-default';
+import {connect} from 'react-redux'
+import { editContact } from '../../store/actions';
 
-  class ContactList extends Component {
-    constructor(props) {
-      super(props);
-      this.expand = this.expand.bind(this);
-      this.add = this.add.bind(this);
-      this.update = this.update.bind(this);
-      var c = new contact();
-      this.state = {
-        isOpen: true,
-        menu :['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'],
-        info : [c],
-        count : 1,
-      };
-    }
-  
-    expand(){
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    }
-  
-    add(){
-      const newContact= new contact(this.state.count+1,'other', 'None');
-      const nlst = this.state.info;
-      nlst.push(newContact);
-      this.setState({
-        info : nlst,
-        count:this.state.count+1,
-      });
-    }
-  
-    update(index,type,value){
-      const lst = this.state.info;
-      // console.log(index);
-      var c;
-        for (c of lst) {
+  const ContactList = ({dispatch}) => {
+      let menu = ['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'];
+      const [isOpen, setIsOpen] = useState(true);
+      var con = new contact();
+      const [contactLst, setContactLst] = useState([con])
+      const [count, setCount] = useState(0);
+
+      function update(index, type, value) {
+        var c;
+        for (c of contactLst) {
           if (c.index === index) {
-            if(type === 'type') {
+            if (type = "type") {
               c.name = value;
             } else {
-              c.value = value;
+              c.link = value;
             }
           }
         }
       }
+
+      function add() {
+        var newLst = contactLst.slice();
+        var c = new contact(count + 1);
+        newLst.push(c);
+        setContactLst(newLst);
+        setCount(count+1);
+      }
+      
+      function switchState() {
+        setIsOpen(!isOpen);
+      }
+
+      const input = contactLst.map((contact)=>
+        <ContactUnit menu={menu} key={contact.index+'unit'} value={contact} callBk={update}></ContactUnit>
+      );
   
-    render(){
-      const contacts = this.state.info;
-      const input = contacts.map((contact)=>
-        <ContactUnit menu={this.state.menu} key={contact.index+'unit'} value={contact} callBk={this.update}></ContactUnit>
-    );
-  
-      if(!this.state.isOpen) {
+      if(!isOpen) {
         return(
           <div className="closedContact">
-            <Button type="primary small" onClick={this.expand}>Expand</Button>
+            <Button type="primary small" onClick={switchState}>Expand</Button>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <div className="openedContactTitle">
+              {input}
+              <Button type="primary small" onClick={add}>Add</Button>
+              <Button type="primary small" onClick={switchState}>Collapse</Button>
+            </div>
           </div>
         )
       }
-      return (
-        <div>
-          <div className="openedContactTitle">
-            {input}
-            <Button type="primary small" onClick={this.add}>Add</Button>
-            <Button type="primary small" onClick={this.expand}>Collapse</Button>
-          </div>
-        </div>
-      )
-    }
+
   }
 
   class ContactUnit extends Component{
@@ -82,7 +69,7 @@ import 'element-theme-default';
       const allOptions = this.props.menu;
       const curr = this.props.value.index;
       const update = this.props.callBk;
-      const options = allOptions.map(function(option,curr,update){
+      const options = allOptions.map(function(option,curr){
         if (option === curr) {
           return <Select.Option value={option} key={curr} selected >{option}</Select.Option>
         } else {
@@ -102,4 +89,4 @@ import 'element-theme-default';
     }
   }
 
-  export default ContactList;
+  export default connect()(ContactList);

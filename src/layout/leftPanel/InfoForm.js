@@ -16,19 +16,19 @@ import 'element-theme-default';
       return (
         <Form labelWidth="80">
           <Form.Item label="姓名 ">
-            <Input value={name} onChange={(e)=> {setName(e); console.log(name); dispatch(editName(e));}}></Input>
+            <Input value={name} onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
           </Form.Item>
           <Form.Item label="所在地 ">
-            <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion({region}))}}>
-              <Select.Option label="区域一" value="shanghai"></Select.Option>
-              <Select.Option label="区域二" value="beijing"></Select.Option>
+            <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion(e))}}>
+              <Select.Option label="上海" value="shanghai"></Select.Option>
+              <Select.Option label="北京" value="beijing"></Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="出生年月 ">
               <DatePicker
                   value={date}
                   placeholder="选择日期"
-                  onChange={(e)=> {setDate(e); dispatch(editDate({date}))}}
+                  onChange={(e)=> {setDate(e); dispatch(editDate(e))}}
                 />
           </Form.Item>
           <Form.Item label="学历 ">
