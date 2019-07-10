@@ -1,51 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ContactList from './ContactList';
 import EducationInfo from './EducationInfo';
+import { connect } from 'react-redux'
+import {editName, editRegion, editDate, editEducation} from '../../store/actions';
 import {contact, education} from '../util';
 import { Button, Form, Input, Select, DatePicker } from 'element-react';
 import 'element-theme-default';
 
-  class InfoForm extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        user : this.props.user,
-      }
-    }
+  const InfoForm = ({dispatch}) => {
+    const [name, setName] = useState('');
+    const [region, setRegion] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [edu, setEdu] = useState('');
 
-    onSubmit(e) {
-        console.log(this.state.user);
-        e.preventDefault();
-    }
-
-    onChange(key, value) {
-      this.state.user[key] = value;
-      this.forceUpdate();
-    }
-
-    render() {
       return (
-        <Form model={this.state.user} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
+        <Form labelWidth="80">
           <Form.Item label="姓名 ">
-            <Input value={this.state.user.name} onChange={this.onChange.bind(this, 'name')}></Input>
+            <Input value={name} onChange={(e)=> {setName(e); console.log(name); dispatch(editName(e));}}></Input>
           </Form.Item>
           <Form.Item label="所在地 ">
-            <Select value={this.state.user.region} placeholder="请选择活动区域" onChange={this.onChange.bind(this, 'region')}>
+            <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion({region}))}}>
               <Select.Option label="区域一" value="shanghai"></Select.Option>
               <Select.Option label="区域二" value="beijing"></Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="出生年月 ">
-              <Form.Item prop="date1" labelWidth="0px">
-                <DatePicker
-                  value={this.state.user.date}
+              <DatePicker
+                  value={date}
                   placeholder="选择日期"
-                  onChange={this.onChange.bind(this, 'date')}
+                  onChange={(e)=> {setDate(e); dispatch(editDate({date}))}}
                 />
-              </Form.Item>
           </Form.Item>
           <Form.Item label="学历 ">
-            <Select value={this.state.user.education} placeholder="请选择您的最高学历" onChange={this.onChange.bind(this, 'education')}>
+            <Select value={edu} placeholder="请选择您的最高学历" onChange={(e)=>{setEdu(e); dispatch(editEducation({edu}))}}>
               <Select.Option label="初中" value="初中"></Select.Option>
               <Select.Option label="高中" value="高中"></Select.Option>
               <Select.Option label="本科" value="本科"></Select.Option>
@@ -55,16 +42,15 @@ import 'element-theme-default';
             </Select>
           </Form.Item>
           <Form.Item label="联系方式 ">
-            <ContactList parentContact={this.state.user.contact} parentUpdate={this}></ContactList>
+            <ContactList></ContactList>
           </Form.Item>
-          <EducationInfo parentEducation={this.state.user.educationExperience} parentUpdate={this}></EducationInfo>
+          <EducationInfo></EducationInfo>
           <Form.Item>
             <Button type="primary" nativeType="submit">立即创建</Button>
             <Button>取消</Button>
           </Form.Item>
         </Form>
       )
-    }
   }
 
-  export default InfoForm;
+  export default connect()(InfoForm);

@@ -1,4 +1,4 @@
-import { EDIT_NAME, EDIT_DATE, EDIT_REGION } from "./actions";
+import { EDIT_NAME, EDIT_DATE, EDIT_REGION, EDIT_EDUCATION } from "./actions";
 import { combineReducers } from "redux";
 
 
@@ -16,6 +16,7 @@ const initialState = {
 function updateUser(state=initialState, action) {
     switch(action.type) {
         case EDIT_NAME:
+            console.log(state);
             return Object.assign({}, state, {name: action.text});
         case EDIT_DATE:
             return Object.assign({}, state, {date: action.text});
@@ -30,7 +31,7 @@ function updateStyle(state=initialState, action) {
     return state;
 }
 
-export default updateApp = combineReducers({
+export const updateApp = combineReducers({
     updateUser,
     updateStyle
 })

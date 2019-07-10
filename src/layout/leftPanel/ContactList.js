@@ -9,10 +9,11 @@ import 'element-theme-default';
       this.expand = this.expand.bind(this);
       this.add = this.add.bind(this);
       this.update = this.update.bind(this);
+      var c = new contact();
       this.state = {
         isOpen: true,
         menu :['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'],
-        info : this.props.parentContact,
+        info : [c],
         count : 1,
       };
     }
