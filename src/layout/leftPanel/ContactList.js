@@ -89,4 +89,9 @@ import { editContact } from '../../store/actions';
     }
   }
 
+  // function mapStateToProps(state) {
+  //   var contactLst = state.user.contact;
+  //   return {contactLst};
+  // }
+
   export default connect()(ContactList);

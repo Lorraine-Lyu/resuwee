@@ -8,6 +8,7 @@ import RightPanel from './layout/RightPanel'
 import NavBar from './layout/NavBar'
 import { Layout } from 'element-react';
 import 'element-theme-default';
+import { connect } from 'react-redux';
 
 
 
@@ -69,7 +70,10 @@ class App extends Component {
 }
 
 
+function mapStateToProps(state) {
+  const user = state.user;
+  return {user};
+}
 
 
-
-export default App;
+export default connect(mapStateToProps)(App);

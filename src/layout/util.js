@@ -5,7 +5,7 @@ export class user {
     this.region = null;
     this.contact= [new contact(1,null,null)];
     this.education= ''
-    this.educationExperience = [new education(null, null, null)];
+    this.educationExperience = [new education(1, null, null)];
   }
 }
 
