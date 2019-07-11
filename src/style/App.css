@@ -62,7 +62,6 @@
   color: #FA7268 !important;
 }
 .LeftPanel {
-  margin:20px;
   padding:10px;
   border: 1px black solid;
   resize: horizontal;
@@ -71,7 +70,6 @@
   border-radius: 2px;
 }
 .RightPanel {
-  margin:20px;
   padding:10px;
   border: 1px black solid;
   resize: horizontal;
