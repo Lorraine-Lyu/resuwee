@@ -1,6 +1,6 @@
 import React, { useState, Component} from 'react';
 import {contact} from '../util';
-import { Button, Input, Select} from 'element-react';
+import { Button, Input, Select, Form} from 'element-react';
 import 'element-theme-default';
 import {connect} from 'react-redux'
 import { editContact } from '../../store/actions';
@@ -14,15 +14,18 @@ import { editContact } from '../../store/actions';
 
       function update(index, type, value) {
         var c;
-        for (c of contactLst) {
+        var nlst = contactLst.slice();
+        for (c of nlst) {
           if (c.index === index) {
-            if (type = "type") {
+            if (type === "type") {
               c.name = value;
             } else {
               c.link = value;
             }
           }
         }
+        setContactLst(nlst);
+        dispatch(editContact(nlst));
       }
 
       function add() {
@@ -31,14 +34,26 @@ import { editContact } from '../../store/actions';
         newLst.push(c);
         setContactLst(newLst);
         setCount(count+1);
-      }
-      
+        dispatch(editContact(newLst));
+      };
+
+      function remove(index) {
+        var nlst = contactLst.slice();
+        for (var i of nlst) {
+          if (i.index === index) {
+            nlst.splice(i,1);
+          }
+        }
+        setContactLst(nlst);
+        dispatch(editContact(nlst))
+      };
+
       function switchState() {
         setIsOpen(!isOpen);
-      }
+      };
 
       const input = contactLst.map((contact)=>
-        <ContactUnit menu={menu} key={contact.index+'unit'} value={contact} callBk={update}></ContactUnit>
+        <ContactUnit menu={menu} key={contact.index+'unit'} index={contact.index} value={contact} callBk={update} remove={remove}></ContactUnit>
       );
   
       if(!isOpen) {
@@ -61,14 +76,12 @@ import { editContact } from '../../store/actions';
 
   }
 
-  class ContactUnit extends Component{
-    constructor(props) {
-      super(props);
-    }
-    render(){
-      const allOptions = this.props.menu;
-      const curr = this.props.value.index;
-      const update = this.props.callBk;
+  function ContactUnit (props) {
+      const allOptions = props.menu;
+      const curr = props.value.index;
+      const update = props.callBk;
+      const index = props.inedx;
+      const remove = props.remove;
       const options = allOptions.map(function(option,curr){
         if (option === curr) {
           return <Select.Option value={option} key={curr} selected >{option}</Select.Option>
@@ -77,16 +90,25 @@ import { editContact } from '../../store/actions';
         }
       }
   
-    );
-      // console.log(curr);
-      const select = <Select name='contactMethods' key={curr+'select'} onChange={update(curr, 'type', this.value)}>{options}</Select>
+    )
+      const select = <Select name='contactMethods' key={curr+'select'} onChange={e => update(curr, 'type', e)}>{options}</Select>
       return (
-        <div className="contactUnit" key={this.props.index+'div'}>
-          {select} 
-          link: <Input type="text" className="contactInput" key={curr+'input'} value={this.props.value.link} onChange={update(curr, 'value', this.value)}></Input>
+        <div className="contactUnit">
+          <Form.Item className="contactUnit" key={curr+'div'}>
+            {select} 
+          </Form.Item>
+          <Form.Item label="link: ">
+            <Input type="text" className="contactInput" key={curr+'input'} value={props.value.link} onChange={e => update(curr, 'value', e)}></Input>
+          </Form.Item>
+          <Button type="text" icon="delete" onClick={()=>remove(index)}></Button>
         </div>
       )
-    }
+    
   }
 
-  export default connect()(ContactList);
+  function mapStateToProps(state) {
+    var contactLst = state.updateUser.user.contact;
+    return {contactLst};
+  }
+
+  export default connect(mapStateToProps)(ContactList);

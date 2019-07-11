@@ -1,36 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import {connect} from 'react-redux'
 
-class RightPanel extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+function RightPanel(props) {
     return(
-      <div className = {this.props.className}>
-          <CollapseBtn  direction = {this.props.direction} expandRight = {this.props.expandRight}/>
-          <p>{this.props.content}</p>
+      <div className = {props.className}>
+          <CollapseBtn  direction = {props.direction} expandRight = {props.expandRight}/>
+          <p>{props.content}</p>
       </div>
     )
-  }
 }
 
-class CollapseBtn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rightIsExpanded:true,
-    }
-  }
-
-  render() {
-    // console.log(this.props.direction);
+function CollapseBtn(props) {
     return(
-      <button className={"triangle-" + this.props.direction} onClick = {()=>this.props.expandRight()}>
-        {this.props.direction === "right" ? (<i className="right" />) : (<i className="left"/>)}
+      <button className={"triangle-" + props.direction} onClick = {()=>props.expandRight()}>
+        {props.direction === "right" ? (<i className="right" />) : (<i className="left"/>)}
       </button>
     )
-      }
 }
 
-export default RightPanel;
+function mapStateToProps(state) {
+  var user = state.updateUser.user;
+  return {user};
+}
+
+export default connect(mapStateToProps)(RightPanel);

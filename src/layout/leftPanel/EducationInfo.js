@@ -1,30 +1,56 @@
-import React, { Component, useState} from 'react';
+import React, { useState} from 'react';
 import {education} from '../util';
 import { Button, Input, Select, Layout, Form, DatePicker} from 'element-react';
 import 'element-theme-default';
-import { editContact } from '../../store/actions';
+import { editEducationInfo } from '../../store/actions';
+import { connect } from 'react-redux';
 
-const EducationInfo = ({dispatch}) => {
-      var edu1 = new education(0);
+const EducationInfo = ({eduExp, dispatch}) => {
+      var edu1 = eduExp;
+      // console.log(eduExp);
       const [isOpen, setIsOpen] = useState(true);
-      const [count, setCount] = useState(0);
-      const [eduLst, setEduLst] = useState([edu1]);
-      const toShow = eduLst.map((edu)=> <EducationUnit key={edu.index} value={edu} callBk={update}></EducationUnit>);
+      const [count, setCount] = useState(1);
+      const [eduLst, setEduLst] = useState(edu1);
+const toShow = eduLst.map((eduUnit)=> {return <EducationUnit key={eduUnit.index} index={eduUnit.index} value={eduUnit} callBk={update} delete={remove}></EducationUnit>});
 
       function switchState() {
         setIsOpen(!isOpen);
       }
     
       function add() {
-        setCount(count+1);
+
         const newEdu= new education(count);
+        setCount(count+1);
         var nlst = eduLst.slice();
         nlst.push(newEdu);
         setEduLst(nlst)
-      }
+        dispatch(editEducationInfo(nlst));
+      };
 
-      function update() {
-        console.log(update);
+      function remove(index) {
+        var nlst = eduLst.slice();
+        for (var i of nlst) {
+          // console.log(index)
+          if (i.index === index) {
+            nlst.splice(i, 1);
+          }
+        }
+        // console.log(nlst);
+        setEduLst(nlst);
+        dispatch(editEducationInfo(nlst));
+      };
+
+      function update(index, obj) {
+        var e;
+        var nlst = eduLst.slice();
+        // console.log(obj);
+        for (e of nlst) {
+          if (e.index === index) {
+            e = obj;
+          }
+        }
+        setEduLst(nlst);
+        dispatch(editEducationInfo(nlst));
       }
 
       if(!isOpen) {
@@ -45,27 +71,29 @@ const EducationInfo = ({dispatch}) => {
 }
 
 function EducationUnit (props) {
-  let edu = props.value;
+  let eduUnit = props.value;
   let index = props.index;
   let update = props.callBk;
+  let remove = props.delete;
 
-  function onChange(key, value) {
-    edu[key] = value;
-    this.forceUpdate();
+  function onChange(value, key) {
+    eduUnit[key] = value;
+    update(eduUnit.index, eduUnit);
+    // forceUpdate();
   };
 
   return(
     <div>
       <Form.Item label="所在学校： ">
-        <Input placeholder="请输入就读学校名称"></Input>
+        <Input placeholder="请输入就读学校名称" value={eduUnit.school} onChange={(e)=>onChange(e, 'school')}></Input>
       </Form.Item>
       <Form.Item label="时间： ">
         <Layout.Col span="8">
           <Form.Item labelWidth="0px">
             <DatePicker
-              value={edu.startDate}
+              value={eduUnit.startDate}
               placeholder="选择开始日期"
-              onChange={onChange.bind(this, 'startDate')}
+              onChange={(e)=> onChange.bind(e, 'startDate')}
             />
           </Form.Item>
         </Layout.Col>
@@ -73,22 +101,29 @@ function EducationUnit (props) {
         <Layout.Col span="8">
           <Form.Item labelWidth="0px">
             <DatePicker
-              value={edu.endDate}
+              value={eduUnit.endDate}
               placeholder="选择结束日期"
-              onChange={onChange.bind(this, 'endDate')}
+              onChange={(e)=>onChange.bind(e, 'endDate')}
             />
           </Form.Item>
           </Layout.Col>
         </Form.Item>
       <Form.Item label="专业： ">
-        <Input placeholder="请输入主要专业"></Input>
+        <Input placeholder="请输入主要专业" value={eduUnit.major} onChange={(e)=> onChange(e, 'major')}></Input>
       </Form.Item>
-      <Form.Item label="专业课程： " key={index+"courses"}>
-        <Input placeholder="请输入主要学习课程"></Input>
+      <Form.Item label="专业课程： ">
+        <Input placeholder="请输入主要学习课程"  value={eduUnit.courses} onChange={(e)=> onChange(e, "courses")}></Input>
       </Form.Item>
+      <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
     </div>
 
   );
 }
 
-export default EducationInfo;
+function mapStateToProps(state) {
+    var eduExp = state.updateUser.user.educationExperience;
+    // console.log(eduExp);
+    return {eduExp};
+}
+
+export default connect(mapStateToProps)(EducationInfo);

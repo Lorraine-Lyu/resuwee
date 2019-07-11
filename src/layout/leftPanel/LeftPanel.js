@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InfoForm from './InfoForm';
 import 'element-theme-default';
+import { connect } from 'react-redux';
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -14,12 +15,15 @@ class LeftPanel extends Component {
       return(
         <div className = "LeftPanel">
             <InfoForm user={person}></InfoForm>
-            
         </div>
       )
     }
   }
 
+  function mapStateToProps(state) {
+    const user = state.updateUser.user;
+    return {user};
+  }
 
-  export default LeftPanel;
+  export default connect(mapStateToProps)(LeftPanel);
   

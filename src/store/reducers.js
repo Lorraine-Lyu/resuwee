@@ -1,5 +1,6 @@
 import { EDIT_NAME, EDIT_DATE, EDIT_REGION, EDIT_EDUCATION, EDIT_CONTACT, EDIT_EDUCATION_INFO } from "./actions";
 import { combineReducers } from "redux";
+import {contact, education} from "../layout/util"
 
 
 const initialState = {
@@ -8,9 +9,12 @@ const initialState = {
         date: '',
         region:'',
         education:'',
-        contact:[],
-        educationExperience:[]
+        contact:[new contact(0)],
+        educationExperience:[new education(0)]
     },
+    style: {
+        themeColor: '',
+    }
 }
 
 // console.log(store.getState());
@@ -35,7 +39,7 @@ function updateUser(state=initialState, action) {
             user.contact = action.contactObject;
             return Object.assign({}, state, user);
         case EDIT_EDUCATION_INFO:
-            user.educationExperience = action.educationObject;
+            user.educationExperience = action.eduObject;
             return Object.assign({}, state, user);
         default:
             return state;

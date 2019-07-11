@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 import {updateApp} from './reducers';
+import React from 'react';
 
-const store = createStore(updateApp)
-export default store;
+export const store = createStore(updateApp)
+export const context = React.createContext();
