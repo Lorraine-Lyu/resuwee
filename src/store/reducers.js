@@ -9,8 +9,8 @@ const initialState = {
         date: '',
         region:'',
         education:'',
-        contact:[new contact()],
-        educationExperience:[new education()]
+        contact:[new contact(0)],
+        educationExperience:[new education(0)]
     },
     style: {
         themeColor: '',

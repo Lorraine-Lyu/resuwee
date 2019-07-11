@@ -15,16 +15,15 @@ class LeftPanel extends Component {
       return(
         <div className = "LeftPanel">
             <InfoForm user={person}></InfoForm>
-
         </div>
       )
     }
   }
 
-  // function mapStateToProps(state) {
-  //   const user = state.user;
-  //   return {user};
-  // }
+  function mapStateToProps(state) {
+    const user = state.updateUser.user;
+    return {user};
+  }
 
-  export default connect()(LeftPanel);
+  export default connect(mapStateToProps)(LeftPanel);
   
