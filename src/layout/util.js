@@ -19,9 +19,12 @@ export class contact {
 }
 
 export class education {
-  constructor(school, year, field){
-    this.school = school;
-    this.year = year;
-    this.field = field;
+  constructor(index){
+    this.index = index;
+    this.school = "";
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.major = "";
+    this.courses = "";
   }
 }
