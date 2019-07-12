@@ -11,7 +11,7 @@ const EducationInfo = ({eduExp, dispatch}) => {
       const [isOpen, setIsOpen] = useState(true);
       const [count, setCount] = useState(1);
       const [eduLst, setEduLst] = useState(edu1);
-const toShow = eduLst.map((eduUnit)=> {return <EducationUnit key={eduUnit.index} index={eduUnit.index} value={eduUnit} callBk={update} delete={remove}></EducationUnit>});
+      const toShow = eduLst.map((eduUnit)=> {return <EducationUnit key={eduUnit.index} index={eduUnit.index} value={eduUnit} callBk={update} delete={remove}></EducationUnit>});
 
       function switchState() {
         setIsOpen(!isOpen);
@@ -88,7 +88,7 @@ function EducationUnit (props) {
         <Input placeholder="请输入就读学校名称" value={eduUnit.school} onChange={(e)=>onChange(e, 'school')}></Input>
       </Form.Item>
       <Form.Item label="时间： ">
-        <Layout.Col span="8">
+        <Layout.Col span="5">
           <Form.Item labelWidth="0px">
             <DatePicker
               value={eduUnit.startDate}
@@ -97,8 +97,8 @@ function EducationUnit (props) {
             />
           </Form.Item>
         </Layout.Col>
-        <Layout.Col className="line" span="2">-</Layout.Col>
-        <Layout.Col span="8">
+        <Layout.Col className="line" span="1">-</Layout.Col>
+        <Layout.Col span="5">
           <Form.Item labelWidth="0px">
             <DatePicker
               value={eduUnit.endDate}
@@ -116,7 +116,6 @@ function EducationUnit (props) {
       </Form.Item>
       <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
     </div>
-
   );
 }
 

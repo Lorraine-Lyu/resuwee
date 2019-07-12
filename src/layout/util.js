@@ -22,9 +22,20 @@ export class education {
   constructor(index){
     this.index = index;
     this.school = "";
-    this.startDate = new Date();
-    this.endDate = new Date();
+    this.startDate = new Date(0);
+    this.endDate = new Date(0);
     this.major = "";
     this.courses = "";
+  }
+}
+
+export class workExperience {
+  constructor(index) {
+    this.index = index;
+    this.company = "";
+    this.jobTitle = "";
+    this.startDate = new Date(0);
+    this.endDate = new Date(0);
+    this.description = "";
   }
 }
