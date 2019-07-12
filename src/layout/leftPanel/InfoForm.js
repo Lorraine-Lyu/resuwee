@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import ContactList from './ContactList';
 import EducationInfo from './EducationInfo';
+import WorkExperience from './WorkExperience';
 import { connect } from 'react-redux'
 import {editName, editRegion, editDate, editEducation} from '../../store/actions';
-import {contact, education} from '../util';
 import { Button, Form, Input, Select, DatePicker } from 'element-react';
 import 'element-theme-default';
 
-  const InfoForm = ({dispatch}) => {
-    const [name, setName] = useState('');
-    const [region, setRegion] = useState('');
-    const [date, setDate] = useState(new Date());
-    const [edu, setEdu] = useState('');
+  const InfoForm = ({Name, Region, birthDate, Edu, dispatch}) => {
+    const [name, setName] = useState(Name);
+    const [region, setRegion] = useState(Region);
+    const [date, setDate] = useState(birthDate);
+    const [edu, setEdu] = useState(Edu);
 
       return (
-        <Form labelWidth="80">
+        <Form labelWidth="70">
           <Form.Item label="姓名 ">
-            <Input value={name} onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
+            <Input value={name} placeholder="请输入您的姓名" onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
           </Form.Item>
           <Form.Item label="所在地 ">
             <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion(e))}}>
@@ -45,6 +45,7 @@ import 'element-theme-default';
             <ContactList></ContactList>
           </Form.Item>
           <EducationInfo></EducationInfo>
+          <WorkExperience></WorkExperience>
           <Form.Item>
             <Button type="primary" nativeType="submit">立即创建</Button>
             <Button>取消</Button>
@@ -53,4 +54,14 @@ import 'element-theme-default';
       )
   }
 
-  export default connect()(InfoForm);
+  function mapStateToProps(state) {
+    var user = state.updateUser.user;
+    return {
+      Name: user.name,
+      birthDate: user.date,
+      Region: user.region,
+      Edu: user.education
+      }
+  }
+
+  export default connect(mapStateToProps)(InfoForm);

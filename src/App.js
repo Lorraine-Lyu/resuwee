@@ -26,7 +26,7 @@ class App extends Component {
 
   }
   expandRight() {
-    console.log(this.state.rightIsExpanded);
+    // console.log(this.state.rightIsExpanded);
     this.setState({rightIsExpanded:!this.state.rightIsExpanded});
   };
 
@@ -58,10 +58,10 @@ class App extends Component {
         <div>
           <NavBar />
           <Layout.Col span='12'>
-            <LeftPanel className = "LeftPanel" profile={this.state.user} upd={this.update}/>
+            <LeftPanel  profile={this.state.user} upd={this.update}/>
           </Layout.Col>
           <Layout.Col span="12">
-            <RightPanel className = "RightPanel" content = {this.state.content} profile={this.state.user} expandRight = {this.binded} direction = "left"/>
+            <RightPanel  content = {this.state.content} profile={this.state.user} expandRight = {this.binded} direction = "left"/>
           </Layout.Col>
         </div>);
       }

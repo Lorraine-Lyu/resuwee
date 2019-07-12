@@ -1,4 +1,4 @@
-import React, { useState, Component} from 'react';
+import React, { useState} from 'react';
 import {contact} from '../util';
 import { Button, Input, Select, Form} from 'element-react';
 import 'element-theme-default';

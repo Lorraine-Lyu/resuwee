@@ -4,6 +4,8 @@ export const EDIT_REGION = "EDIT REGION";
 export const EDIT_CONTACT = "EDIT CONTECT";
 export const EDIT_EDUCATION = "EDIT EDUCATION";
 export const EDIT_EDUCATION_INFO = "EDIT EDUCATION INFO";
+export const CREATE_WORK = "CREATE WORK";
+export const EDIT_WORK = "EDIT WORK";
 
 export function editName(text) {
     return {type: EDIT_NAME, text: text};
@@ -27,4 +29,12 @@ export function editContact(contact) {
 
 export function editEducationInfo(eduInfo) {
     return {type:EDIT_EDUCATION_INFO, eduObject:eduInfo};
+}
+
+export function createWork(){
+    return {type:CREATE_WORK};
+}
+
+export function editWork(work){
+    return {type: EDIT_WORK, workObj: work};
 }
