@@ -4,7 +4,7 @@ import './style/App.css';
 import styled from 'styled-components';
 import {user} from './layout/util';
 import LeftPanel from './layout/leftPanel/LeftPanel'
-import RightPanel from './layout/RightPanel'
+import RightPanel from './layout/rightPanel/RightPanel'
 import NavBar from './layout/NavBar'
 import { Layout } from 'element-react';
 import 'element-theme-default';
