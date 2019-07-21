@@ -5,11 +5,10 @@ import 'element-theme-default';
 import {connect} from 'react-redux'
 import { editContact } from '../../store/actions';
 
-  const ContactList = ({dispatch}) => {
+  const ContactList = ({contacts, dispatch}) => {
       let menu = ['other','phone','facebook', 'gmail','linkedin','instagram','qq','wechat'];
       const [isOpen, setIsOpen] = useState(true);
-      var con = new contact();
-      const [contactLst, setContactLst] = useState([con])
+      const [contactLst, setContactLst] = useState(contacts)
       const [count, setCount] = useState(0);
 
       function update(index, type, value) {
@@ -38,12 +37,9 @@ import { editContact } from '../../store/actions';
       };
 
       function remove(index) {
+        
         var nlst = contactLst.slice();
-        for (var i of nlst) {
-          if (i.index === index) {
-            nlst.splice(i,1);
-          }
-        }
+        nlst = nlst.filter((i)=> {return i.index != index})
         setContactLst(nlst);
         dispatch(editContact(nlst))
       };
@@ -80,7 +76,7 @@ import { editContact } from '../../store/actions';
       const allOptions = props.menu;
       const curr = props.value.index;
       const update = props.callBk;
-      const index = props.inedx;
+      const index = props.index;
       const remove = props.remove;
       const options = allOptions.map(function(option,curr){
         if (option === curr) {
@@ -107,8 +103,8 @@ import { editContact } from '../../store/actions';
   }
 
   function mapStateToProps(state) {
-    var contactLst = state.updateUser.user.contact;
-    return {contactLst};
+    var contacts = state.updateUser.user.contact;
+    return {contacts};
   }
 
   export default connect(mapStateToProps)(ContactList);

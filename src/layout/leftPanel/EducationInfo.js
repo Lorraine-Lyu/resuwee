@@ -29,13 +29,7 @@ const EducationInfo = ({eduExp, dispatch}) => {
 
       function remove(index) {
         var nlst = eduLst.slice();
-        for (var i of nlst) {
-          // console.log(index)
-          if (i.index === index) {
-            nlst.splice(i, 1);
-          }
-        }
-        // console.log(nlst);
+        nlst = nlst.filter((i)=> {return i.index != index})
         setEduLst(nlst);
         dispatch(editEducationInfo(nlst));
       };
