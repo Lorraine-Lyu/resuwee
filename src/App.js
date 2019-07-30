@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './assets/logo.svg';
 import './style/App.css';
-import styled from 'styled-components';
 import {user} from './layout/util';
 import LeftPanel from './layout/leftPanel/LeftPanel'
 import RightPanel from './layout/rightPanel/RightPanel'
@@ -44,7 +43,6 @@ class App extends Component {
     // console.log(this.state.user);
       const newContent = "This is the expanded right panel";
       if(this.state.rightIsExpanded){
-        const styleDiv = styled(RightPanel)`width:100%`;
         return(
         <div>
           <NavBar />

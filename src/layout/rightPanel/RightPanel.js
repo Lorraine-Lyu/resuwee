@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import { Menu, Button} from 'element-react';
 import Contacts from './Contacts';
-import 'element-theme-default';
+// import 'element-theme-default';
 
 function RightPanel(props) {
     return(
