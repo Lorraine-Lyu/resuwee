@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import { Menu, Button} from 'element-react';
 import Contacts from './Contacts';
-import 'element-theme-default';
+import Bio from './rightPanel/Bio';
+import Edu from './rightPanel/Edu';
+// import 'element-theme-default';
 
-function RightPanel(props) {
+function RightPanel({user}) {
+    const [page, setPage] = useState("bio"); //three states (bio, edu, work)
+    var show;
+    if (page === "bio") {
+        show = <Bio></Bio>;
+    } else if (page=== "edu") {
+        show = <Edu></Edu>;
+    }
     return(
       <div className = {props.className}>
           <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" >
@@ -12,16 +21,9 @@ function RightPanel(props) {
             <Menu.Item index="2">学术经历</Menu.Item>
             <Menu.Item index="3">就业经历</Menu.Item>
           </Menu>
+          {show}
           <Contacts></Contacts>
-          <CollapseBtn expandRight = {props.expandRight}/>
       </div>
-    )
-}
-
-function CollapseBtn(props) {
-    return(
-      <Button  type="primary" onClick = {()=>props.expandRight()} icon="view">
-      </Button>
     )
 }
 

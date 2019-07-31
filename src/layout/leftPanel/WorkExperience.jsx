@@ -38,7 +38,7 @@ const WorkExperience = ({works, dispatch}) => {
 
     function remove(index){
         var nlst = workLst.slice();
-        nlst = nlst.filter((i)=> {return i.index != index})
+        nlst = nlst.filter((i)=> {return i.index !== index})
         setWorkLst(nlst);
         dispatch(editWork(nlst));
     }

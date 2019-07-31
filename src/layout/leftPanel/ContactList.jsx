@@ -39,7 +39,7 @@ import { editContact } from '../../store/actions';
       function remove(index) {
         
         var nlst = contactLst.slice();
-        nlst = nlst.filter((i)=> {return i.index != index})
+        nlst = nlst.filter((i)=> {return i.index !== index})
         setContactLst(nlst);
         dispatch(editContact(nlst))
       };
