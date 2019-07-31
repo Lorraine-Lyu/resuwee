@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
-import { Menu, Button} from 'element-react';
+import {Card} from 'element-react';
 import Contacts from './Contacts';
 import 'element-theme-default';
 
 const Bio = ({user}) => {
+    console.log("rendered ");
+    const curr = user;
+    console.log(curr);
     return(
-        <Contacts></Contacts>
+        <div>
+            <Card>
+                <div>name: {curr.name}</div>
+                <div>region: {curr.region}</div>
+            </Card>
+            <Contacts></Contacts>
+        </div>
+        
     );
 }
 

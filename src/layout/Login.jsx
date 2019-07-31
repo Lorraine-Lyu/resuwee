@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'element-theme-default';
 import {Card, Form, Input, Button} from 'element-react';
 
 function Login (props) {
@@ -14,6 +15,10 @@ function Login (props) {
             this.setMode("login");
             this.setText("Don't have an account")
         }
+    }
+
+    function validateLogin() {
+        return true;
     }
     return (
         <Card className="login">
@@ -32,3 +37,5 @@ function Login (props) {
         </Card>
     )
 }
+
+export default Login;

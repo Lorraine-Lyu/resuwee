@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style/index.css';
 import * as serviceWorker from './serviceWorker';
-import Direct from './routes/Direct';
+import Direct from './routes/Direct.jsx';
 
 var root = document.getElementById('root');
 
