@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import { Menu, Button} from 'element-react';
 import Bio from './Bio';
 import Edu from './Edu';
+import Work from './Work';
 // import 'element-theme-default';
 
-function RightPanel(props) {
+function RightPanel(props, {user}) {
   const [page, setPage] = useState("bio"); //three states (bio, edu, work)
   var show;
   if (page === "bio") {
@@ -13,13 +14,13 @@ function RightPanel(props) {
   } else if (page=== "edu") {
       show = <Edu></Edu>;
   } else if (page === "work") {
-      console.log("show work")
+      show = <Work></Work>
   }
 
-  useEffect(() =>{
-      console.log("update")
-    }
-  );
+  // useEffect(() =>{
+  //     // console.log("update")
+  //   }
+  // );
 
     function onSelect(e) {
       setPage(e);
