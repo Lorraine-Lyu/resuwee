@@ -32,7 +32,7 @@ import 'element-theme-default';
                 />
           </Form.Item>
           <Form.Item label="学历 ">
-            <Select value={edu} placeholder="请选择您的最高学历" onChange={(e)=>{setEdu(e); dispatch(editEducation({edu}))}}>
+            <Select value={edu} placeholder="请选择您的最高学历" onChange={(e)=>{setEdu(e); dispatch(editEducation(e))}}>
               <Select.Option label="初中" value="初中"></Select.Option>
               <Select.Option label="高中" value="高中"></Select.Option>
               <Select.Option label="本科" value="本科"></Select.Option>

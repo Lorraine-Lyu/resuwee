@@ -72,37 +72,39 @@ function WorkUnit(props){
 
     return(
         <div>
-        <Form.Item label="所在单位： ">
-          <Input placeholder="请输入所在单位名称" value={work.company} onChange={(e)=>onChange(e, 'company')}></Input>
+        <Form.Item label="所在单位： " key={props.index+"place"}>
+          <Input placeholder="请输入所在单位名称" value={work.company} onChange={(e)=>onChange(e, 'company') } key={props.index+"place1"}></Input>
         </Form.Item>
-        <Form.Item label="职位： ">
-          <Input placeholder="请输入职位名称" value={work.jobTitle} onChange={(e)=>onChange(e, 'jobTitle')}></Input>
+        <Form.Item label="职位： " key={props.index+"position"}>
+          <Input placeholder="请输入职位名称" value={work.jobTitle} onChange={(e)=>onChange(e, 'jobTitle')} key={props.index+"position1"}></Input>
         </Form.Item>
-        <Form.Item label="时间： ">
+        <Form.Item label="时间： " key={props.index+"time"}>
           <Layout.Col span="5">
-            <Form.Item labelWidth="0px">
+            <Form.Item labelWidth="0px" key={props.index+"start"}>
               <DatePicker
                 value={work.startDate}
                 placeholder="选择开始日期"
                 onChange={(e)=> onChange.bind(e, 'startDate')}
+                key={props.index+"start1"}
               />
             </Form.Item>
           </Layout.Col>
           <Layout.Col className="line" span="1">-</Layout.Col>
           <Layout.Col span="5">
-            <Form.Item labelWidth="0px">
+            <Form.Item labelWidth="0px" key={props.index+"end"}>
               <DatePicker
                 value={work.endDate}
                 placeholder="选择结束日期"
                 onChange={(e)=>onChange.bind(e, 'endDate')}
+                key={props.index+"end1"}
               />
             </Form.Item>
             </Layout.Col>
           </Form.Item>
-        <Form.Item label="工作内容： ">
-          <Input placeholder="请输入主要工作职责描述"  value={work.description} onChange={(e)=> onChange(e, "desxription")}></Input>
+        <Form.Item label="工作内容： " key={props.index+"jobs"}>
+          <Input placeholder="请输入主要工作职责描述"  value={work.description} onChange={(e)=> onChange(e, "desxription")} key={props.index+"jobs1"}></Input>
         </Form.Item>
-        <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
+        <Button type="text" icon="delete" onClick={() => {remove(index)}} key={props.index+"delete"}></Button>
       </div>
     );
 }
