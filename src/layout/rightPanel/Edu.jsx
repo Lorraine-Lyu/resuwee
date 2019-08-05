@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux';
-import {Card} from 'element-react';
+import {Card,Layout} from 'element-react';
 
 function Edu({eduExp}) {
     const eduLst = eduExp;
@@ -10,9 +10,9 @@ function Edu({eduExp}) {
         <div>Fields of study: {edu.courses}</div>
     </Card>})
     return(
-      <div className = "educationExperience">
+      <Layout.Row  className = "educationExperience">
           {show}
-      </div>
+      </Layout.Row>
     )
 }
 

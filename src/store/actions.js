@@ -6,6 +6,8 @@ export const EDIT_EDUCATION = "EDIT EDUCATION";
 export const EDIT_EDUCATION_INFO = "EDIT EDUCATION INFO";
 export const CREATE_WORK = "CREATE WORK";
 export const EDIT_WORK = "EDIT WORK";
+export const LOG_IN = "LOG IN";
+export const LOG_OUT = "LOG OUT"
 
 export function editName(text) {
     return {type: EDIT_NAME, text: text};
