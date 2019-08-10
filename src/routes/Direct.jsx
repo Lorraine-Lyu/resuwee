@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter as Router, Route,} from 'react-router-dom'
 import { connect } from 'react-redux';
 import App from '../App'
-// import RightPanel from '../layout/rightPanel/RightPanel'
 import View from '../layout/View'
 import Login from '../layout/Login'
 

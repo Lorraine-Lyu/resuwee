@@ -19,11 +19,6 @@ function View(props, {user}) {
       show = <Work></Work>
   }
 
-  // useEffect(() =>{
-  //     // console.log("update")
-  //   }
-  // );
-
     function onSelect(e) {
       setPage(e);
     };

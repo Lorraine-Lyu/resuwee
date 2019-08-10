@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'element-theme-default';
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import {Menu} from 'element-react';
 
 const NavBar = ({login}) => {
-  function onSelect() {
-    return true;
+  const [needToLogin, setNeedToLogin] = useState(login);
+  function onSelect(e) {
+    if (e==="2-1" && !login) {
+      setNeedToLogin(!needToLogin);
+    }
   }
-  var status;
-  if (login) {
-    status = "Logout";
-  } else {
-    status = "Login"
+  var status = login ? "log out":"login"
+  if (needToLogin) {
+    return (<Redirect to="/login"></Redirect>)
   }
   return(
     <div>
@@ -31,7 +33,7 @@ const NavBar = ({login}) => {
 }
 
 function mapStateToProps(state) {
-  const login = state.loginInStatusChange.login;
+  const login = state.loginStatusChange.login;
   return {login};
 }
 

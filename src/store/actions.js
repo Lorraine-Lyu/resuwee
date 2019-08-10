@@ -7,7 +7,8 @@ export const EDIT_EDUCATION_INFO = "EDIT EDUCATION INFO";
 export const CREATE_WORK = "CREATE WORK";
 export const EDIT_WORK = "EDIT WORK";
 export const LOG_IN = "LOG IN";
-export const LOG_OUT = "LOG OUT"
+export const LOG_OUT = "LOG OUT";
+export const OVER_WRITE_ALL = "OVER WRITE ALL";
 
 export function editName(text) {
     return {type: EDIT_NAME, text: text};
@@ -39,4 +40,8 @@ export function createWork(){
 
 export function editWork(work){
     return {type: EDIT_WORK, workObj: work};
+}
+
+export function overWriteAll(all) {
+    return {type: OVER_WRITE_ALL, all};
 }

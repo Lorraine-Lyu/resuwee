@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import 'element-theme-default';
+import {connect} from 'react-redux'
 import {Card, Form, Input, Button} from 'element-react';
 
-function Login (props) {
-    const [mode, setMode] = useState(props.mode);
+function Login ({login}) {
+    const [mode, setMode] = useState((login)=>{return login? "login": "register"});
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-    const [text, setText] = useState("");
+    const [text, setText] = useState((login)=>{return login? "Don't have an account":"Already have account?"});
     function changeMode() {
         if (mode == "login") {
-            this.setMode("register");
-            this.setText("Already have account?")
+            setMode("register");
+            setText("Already have account?")
         } else {
-            this.setMode("login");
-            this.setText("Don't have an account")
+            setMode("login");
+            setText("Don't have an account")
         }
     }
 
     function validateLogin() {
         return true;
     }
+
     return (
         <Card className="login">
             <Form>
@@ -31,11 +33,18 @@ function Login (props) {
                     <Input type="password" onChange={e => setPassword(e)}>
                     </Input>
                 </Form.Item>
-                <Button text onClick="changeMode">{text}</Button>
-                <Button onClick={validateLogin({name: name, password: password})}>{mode}</Button>
+                <Button plain onClick={changeMode}>{text}</Button>
+                <Button onClick={validateLogin}>{mode}</Button>
             </Form>
         </Card>
     )
 }
 
-export default Login;
+//this function is a helper function of connect(). It extract the variable required to render this component(Login)
+function mapStateToProps(state) {
+    var login = state.loginStatusChange.login;
+    return {login};
+  }
+
+  //connect()(component) connects the component to the global state, which records all global variables 
+export default connect(mapStateToProps)(Login);
