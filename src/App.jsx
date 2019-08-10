@@ -53,8 +53,7 @@ class App extends Component {
 
 
 function mapStateToProps(state) {
-  const user = state.user;
-  return {user};
+  return {};
 }
 
 

@@ -47,7 +47,7 @@ function CollapseBtn(props) {
 }
 
 function mapStateToProps(state) {
-  var user = state.updateUser.user;
+  var user = state.updateUser.profile;
   return {user};
 }
 

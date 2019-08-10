@@ -103,7 +103,7 @@ import { editContact } from '../../store/actions';
   }
 
   function mapStateToProps(state) {
-    var contacts = state.updateUser.user.contact;
+    var contacts = state.updateUser.profile.contact;
     return {contacts};
   }
 

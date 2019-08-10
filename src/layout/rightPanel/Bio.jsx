@@ -26,7 +26,7 @@ const Bio = ({name, region, date, education}) => {
 
 
 function mapStateToProps(state) {
-    var user = state.updateUser.user;
+    var user = state.updateUser.profile;
     return {"name": user.name,
             "region": user.region,
             "date": user.date,

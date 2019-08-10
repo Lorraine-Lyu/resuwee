@@ -55,7 +55,7 @@ import 'element-theme-default';
   }
 
   function mapStateToProps(state) {
-    var user = state.updateUser.user;
+    var user = state.updateUser.profile;
     return {
       Name: user.name,
       birthDate: user.date,
