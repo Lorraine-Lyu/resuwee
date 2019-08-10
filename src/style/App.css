@@ -71,6 +71,7 @@
 .LeftPanel {
   margin: 20px;
   padding:10px;
+  float:left;
   resize: horizontal;
   overflow: auto;
   min-width: 300px;
@@ -79,6 +80,7 @@
 .RightPanel {
   margin: 20px;
   padding:10px;
+  /* float:right; */
   resize: horizontal;
   overflow: auto;
   min-width: 300px;
