@@ -40,10 +40,10 @@ class App extends Component {
         <div>
           <NavBar />
           <Layout.Col span='12'>
-            <LeftPanel  className="LeftPanel"/>
+            <LeftPanel/>
           </Layout.Col>
           <Layout.Col span="12">
-            <RightPanel className="RightPanel" content = {this.state.content} expandRight = {this.binded} direction = "left"/>
+            <RightPanel expandRight = {this.binded}/>
           </Layout.Col>
         </div>);
       }
@@ -53,8 +53,7 @@ class App extends Component {
 
 
 function mapStateToProps(state) {
-  const user = state.user;
-  return {user};
+  return {};
 }
 
 

@@ -5,14 +5,16 @@ import {contact, education, workExperience} from "../layout/util"
 
 const initialState = {
     login: false,
-    user: {
-        name: '',
+    name: "", //this is the username 
+    password: "", 
+    profile: {
+        name: '', //this is user's real name
         date: new Date(0),
         region:'',
         education:'',
         contact:[new contact(0)],
         educationExperience:[new education(0)],
-        workExperience: [new workExperience()]
+        workExperience: [new workExperience(0)]
     },
     style: {
         themeColor: '',
@@ -22,7 +24,7 @@ const initialState = {
 // console.log(store.getState());
 
 function updateUser(state=initialState, action) {
-    var user = state.user;
+    var user = state.profile;
     switch(action.type) {
         case EDIT_NAME:
             user.name = action.text;

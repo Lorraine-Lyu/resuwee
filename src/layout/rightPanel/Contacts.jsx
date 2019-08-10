@@ -15,7 +15,7 @@ const Contacts = ({contactLst}) => {
 }
 
 function mapStateToProps(state) {
-    var contactLst = state.updateUser.user.contact;
+    var contactLst = state.updateUser.profile.contact;
     return {contactLst};
   }
   

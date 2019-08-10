@@ -114,7 +114,7 @@ function EducationUnit (props) {
 }
 
 function mapStateToProps(state) {
-    var eduExp = state.updateUser.user.educationExperience;
+    var eduExp = state.updateUser.profile.educationExperience;
     // console.log(eduExp);
     return {eduExp};
 }

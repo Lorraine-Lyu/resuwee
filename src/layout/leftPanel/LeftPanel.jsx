@@ -21,7 +21,7 @@ class LeftPanel extends Component {
   }
 
   function mapStateToProps(state) {
-    const user = state.updateUser.user;
+    const user = state.updateUser.profile;
     return {user};
   }
 

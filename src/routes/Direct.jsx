@@ -15,8 +15,7 @@ const Direct = () =>
   </Router>
 
 function mapStateToProps(state) {
-  const user = state.user;
-  return {user};
+  return {};
 }
 
 export default connect(mapStateToProps)(Direct);

@@ -108,7 +108,7 @@ function WorkUnit(props){
 }
 
 function mapStateToProps(state) {
-    var works = state.updateUser.user.workExperience;
+    var works = state.updateUser.profile.workExperience;
     // console.log(eduExp);
     return {works};
 }

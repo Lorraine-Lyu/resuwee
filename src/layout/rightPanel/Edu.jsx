@@ -18,7 +18,7 @@ function Edu({eduExp}) {
 
 
 function mapStateToProps(state) {
-  var user = state.updateUser.user;
+  var user = state.updateUser.profile;
   return {eduExp : user.educationExperience};
 }
 

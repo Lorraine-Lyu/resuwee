@@ -27,7 +27,7 @@ function RightPanel(props, {user}) {
     };
 
     return(
-      <div className = {props.className}>
+      <div className = "RightPanel">
           <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" onSelect={onSelect.bind(this)}>
             <Menu.Item index="bio">基础信息</Menu.Item>
             <Menu.Item index="edu">学术经历</Menu.Item>
@@ -47,7 +47,7 @@ function CollapseBtn(props) {
 }
 
 function mapStateToProps(state) {
-  var user = state.updateUser.user;
+  var user = state.updateUser.profile;
   return {user};
 }
 
