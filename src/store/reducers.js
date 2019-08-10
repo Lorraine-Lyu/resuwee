@@ -64,12 +64,18 @@ function loginStatusChange(state=initialState, action) {
     switch(action.type) {
         case LOG_IN:
             var obj = {login: true };
-            return Object.assign({}, state, obj);
+            var rtn = Object.assign({}, state, obj);
+            return rtn;
         case LOG_OUT:
             var obj = {login: false };
             return Object.assign({}, state, obj);
         case OVER_WRITE_ALL:
-            return Object.assign({}, action.all);
+            var sub = {'name': action.all.name,
+                'profile': action.all.profile,
+                'password': action.all.password,
+                'style':action.all.style}
+            console.log(sub);
+            return Object.assign({}, state, sub);
         default:
             return state;
     }

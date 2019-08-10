@@ -2,16 +2,36 @@ import React, { useState } from 'react';
 import ContactList from './ContactList';
 import EducationInfo from './EducationInfo';
 import WorkExperience from './WorkExperience';
-import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
+import API from '../../api/api';
 import {editName, editRegion, editDate, editEducation} from '../../store/actions';
-import { Button, Form, Input, Select, DatePicker } from 'element-react';
+import { Button, Form, Input, Select, DatePicker, Dialog} from 'element-react';
 import 'element-theme-default';
 
-  const InfoForm = ({Name, Region, birthDate, Edu, dispatch}) => {
+  const InfoForm = ({Name, Region, birthDate, Edu, dispatch, login, profile}) => {
     const [name, setName] = useState(Name);
     const [region, setRegion] = useState(Region);
     const [date, setDate] = useState(birthDate);
     const [edu, setEdu] = useState(Edu);
+    const [dialogVisible, setDialogVisible] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
+    async function submitEdit() {
+      if(!login) {
+        setDialogVisible(true);
+      } else {
+        
+        let response = await API.post('/edit', {
+          "name": Name,
+          "profile": profile,
+        });
+      }
+    }
+
+    if (redirect) {
+      return <Redirect to="/login" />
+    }
 
       return (
         <Form labelWidth="70">
@@ -46,8 +66,23 @@ import 'element-theme-default';
           </Form.Item>
           <EducationInfo></EducationInfo>
           <WorkExperience></WorkExperience>
+          <Dialog
+            title="Alert"
+            size="small"
+            visible={ dialogVisible }
+            onCancel={ () => setDialogVisible(false) }
+            lockScroll={ false }
+          >
+            <Dialog.Body>
+              <span>Please login before you update your webpage content</span>
+            </Dialog.Body>
+            <Dialog.Footer className="dialog-footer">
+              <Button onClick={ () => setDialogVisible(false)}>Cancel</Button>
+              <Button type="primary" onClick={ () => {setDialogVisible(false); setRedirect(true) }}>Login or Register</Button>
+            </Dialog.Footer>
+          </Dialog>
           <Form.Item>
-            <Button type="primary" nativeType="submit">立即创建</Button>
+            <Button type="primary" onClick={submitEdit}>立即创建</Button>
             <Button>取消</Button>
           </Form.Item>
         </Form>
@@ -56,11 +91,15 @@ import 'element-theme-default';
 
   function mapStateToProps(state) {
     var user = state.updateUser.profile;
+    var login = state.loginStatusChange.login;
     return {
+      profile: user,
+      
       Name: user.name,
       birthDate: user.date,
       Region: user.region,
-      Edu: user.education
+      Edu: user.education,
+      login
       }
   }
 

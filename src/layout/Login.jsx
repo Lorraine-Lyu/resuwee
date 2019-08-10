@@ -3,8 +3,8 @@ import 'element-theme-default';
 import {connect} from 'react-redux';
 import API from '../api/api';
 import { Redirect } from 'react-router-dom'
+import {login, overWriteAll} from '../store/actions'
 import {Card, Form, Input, Button} from 'element-react';
-import { overWriteAll } from '../store/actions';
 
 function Login ({dispatch, profile, style}) {
     //register state variable, check react hook for detail
@@ -36,8 +36,9 @@ function Login ({dispatch, profile, style}) {
             console.log(userData);
             if (userData.status == 200) {
                 setWarn("");
+                setBack(true);
+                dispatch(login());
                 dispatch(overWriteAll(userData.data));
-                return <Redirect to="/"></Redirect>
             } else {
                 setWarn("user not found");
             }
@@ -49,6 +50,10 @@ function Login ({dispatch, profile, style}) {
                     "style":style,
                 })
             console.log(userData);
+            if (userData.status == 200) {
+                setWarn("");
+                setBack(true);
+            }
         }
         
     }
