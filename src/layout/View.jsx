@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux'
 import { Menu, Button} from 'element-react';
-import Contacts from './Contacts';
 import Bio from './rightPanel/Bio';
 import Edu from './rightPanel/Edu';
+import Work from './rightPanel/Work';
 // import 'element-theme-default';
 
-function RightPanel({user}) {
-    const [page, setPage] = useState("bio"); //three states (bio, edu, work)
-    var show;
-    if (page === "bio") {
-        show = <Bio></Bio>;
-    } else if (page=== "edu") {
-        show = <Edu></Edu>;
-    }
+function View(props, {user}) {
+    console.log(props.location.pathname);
+  const [page, setPage] = useState("bio"); //three states (bio, edu, work)
+  var show;
+  if (page === "bio") {
+      show = <Bio></Bio>;
+  } else if (page=== "edu") {
+      show = <Edu></Edu>;
+  } else if (page === "work") {
+      show = <Work></Work>
+  }
+
+    function onSelect(e) {
+      setPage(e);
+    };
+
     return(
       <div className = {props.className}>
-          <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" >
-            <Menu.Item index="1">基础信息</Menu.Item>
-            <Menu.Item index="2">学术经历</Menu.Item>
-            <Menu.Item index="3">就业经历</Menu.Item>
+          <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" onSelect={onSelect.bind(this)}>
+            <Menu.Item index="bio">基础信息</Menu.Item>
+            <Menu.Item index="edu">学术经历</Menu.Item>
+            <Menu.Item index="work">就业经历</Menu.Item>
           </Menu>
           {show}
-          <Contacts></Contacts>
       </div>
     )
 }
@@ -32,4 +40,4 @@ function mapStateToProps(state) {
   return {user};
 }
 
-export default connect(mapStateToProps)(RightPanel);
+export default withRouter(connect(mapStateToProps)(View));

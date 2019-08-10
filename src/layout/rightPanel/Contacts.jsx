@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import {connect} from 'react-redux'
-import { Menu, Button} from 'element-react';
+import { Layout, Button} from 'element-react';
 import 'element-theme-default';
 
 const Contacts = ({contactLst}) => {
-    const toShow = contactLst.map((c) => {return <Button key={c.index}>{c.index}</Button>})
+    const toShow = contactLst.map((c) => {return <Button key={c.index}>{c.name}</Button>})
     return (
-        <div className="contactDiv">
-            {toShow}
-        </div>
+        <Layout.Row gutter="20" className="contactDiv">
+            <Layout.Col span="12" offset="6">
+                {toShow}
+            </Layout.Col>
+        </Layout.Row>
     )
 }
 

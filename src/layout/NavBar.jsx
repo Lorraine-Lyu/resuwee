@@ -1,74 +1,40 @@
-import React from 'react';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+import React, {useState} from 'react';
+import 'element-theme-default';
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
+import {Menu} from 'element-react';
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
+const NavBar = ({login}) => {
+  const [needToLogin, setNeedToLogin] = useState(login);
+  function onSelect(e) {
+    if (e==="2-1" && !login) {
+      setNeedToLogin(!needToLogin);
+    }
+  }
+  var status = login ? "log out":"login"
+  if (needToLogin) {
+    return (<Redirect to="/login"></Redirect>)
+  }
+  return(
+    <div>
+      <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" className="bg-light topNav" onSelect={onSelect}>
+        <div className="navbar-brand">Resuwee</div>
+        <Menu.Item index="1" className="nav-link">Donate</Menu.Item>
+        <Menu.SubMenu index="2" title="Settings">
+          <Menu.Item index="2-1">{status}</Menu.Item>
+          <Menu.Item index="2-2">Help</Menu.Item>
+          <Menu.Item index="2-3">选项3</Menu.Item>
+        </Menu.SubMenu>
+        <Menu.Item index="3" className="nav-link">订单管理</Menu.Item>
+      </Menu>
+    </div>
+  )
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-  render() {
-    return (
-      <div>
-        <Navbar color="light" light expand="md" className="topNav">
-          <NavbarBrand href="/">Resuwee</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto " navbar>
-              <NavItem>
-                <NavLink href="/components/">Edit Mode</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="">Resume Generator</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="">Donate</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Settings
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Help
-                  </DropdownItem>
-                  <DropdownItem>
-                    My Profile
-                  </DropdownItem>
-                  <DropdownItem>
-                    Manage Resumes
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    );
-  }
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+  const login = state.loginStatusChange.login;
+  return {login};
+}
+
+export default connect(mapStateToProps)(NavBar);
