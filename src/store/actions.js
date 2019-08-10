@@ -45,3 +45,15 @@ export function editWork(work){
 export function overWriteAll(all) {
     return {type: OVER_WRITE_ALL, all};
 }
+
+export function login() {
+    return {type: LOG_IN};
+}
+
+export function logout() {
+    return {type: LOG_OUT};
+}
+
+// export function setPassword() {
+//     return {type: SET_PASSWORD};
+// }
