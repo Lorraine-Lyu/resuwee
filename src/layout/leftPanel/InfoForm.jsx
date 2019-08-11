@@ -9,7 +9,7 @@ import {editName, editRegion, editDate, editEducation} from '../../store/actions
 import { Button, Form, Input, Select, DatePicker, Dialog} from 'element-react';
 import 'element-theme-default';
 
-  const InfoForm = ({diapatch, Name, Region, birthDate, Edu, dispatch, login, profile}) => {
+  const InfoForm = ({Name, Region, birthDate, Edu, dispatch, login, profile, username, password}) => {
     const [name, setName] = useState(Name);
     const [region, setRegion] = useState(Region);
     const [date, setDate] = useState(birthDate);
@@ -20,12 +20,13 @@ import 'element-theme-default';
     async function submitEdit() {
       if(!login) {
         setDialogVisible(true);
-      } else {
-        
+      } else { 
         let response = await API.post('/edit', {
-          "name": Name,
-          "profile": profile,
+          "name": username,
+          "password": password,
+          "profile": JSON.stringify(profile),
         });
+        console.log(response);
       }
     }
 
@@ -92,9 +93,12 @@ import 'element-theme-default';
   function mapStateToProps(state) {
     var user = state.updateUser.profile;
     var login = state.loginStatusChange.login;
+    var username = state.loginStatusChange.name;
+    var password = state.loginStatusChange.password;
     return {
       profile: user,
-      
+      username,
+      password,
       Name: user.name,
       birthDate: user.date,
       Region: user.region,

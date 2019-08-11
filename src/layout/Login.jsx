@@ -78,11 +78,11 @@ function Login ({dispatch, profile, style}) {
             <Card className="login">
                 <Form>
                     <Form.Item label="userName: ">
-                        <Input onChange={e =>{ setName(e); dispatch(addPassword(e))}}>
+                        <Input onChange={e =>{ setName(e); dispatch(addUsername(e))}}>
                         </Input>
                     </Form.Item>
                     <Form.Item label="password:">
-                        <Input onChange={e => {setPassword(e);dispatch(addUsername(e))}}>
+                        <Input onChange={e => {setPassword(e);dispatch(addPassword(e))}}>
                         </Input>
                     </Form.Item>
                     <Button plain onClick={changeMode}>{text}</Button>
