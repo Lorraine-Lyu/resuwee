@@ -1,4 +1,4 @@
-import { EDIT_NAME, EDIT_DATE, EDIT_REGION, EDIT_EDUCATION, EDIT_CONTACT, EDIT_EDUCATION_INFO , CREATE_WORK, EDIT_WORK, LOG_IN, LOG_OUT, OVER_WRITE_ALL} from "./actions";
+import { EDIT_NAME, EDIT_DATE, EDIT_REGION, EDIT_EDUCATION, EDIT_CONTACT, EDIT_EDUCATION_INFO , CREATE_WORK, EDIT_WORK, LOG_IN, LOG_OUT, OVER_WRITE_ALL, ADD_PASSWORD, ADD_USERNAME} from "./actions";
 import { combineReducers } from "redux";
 import {contact, education, workExperience} from "../layout/util"
 
@@ -67,15 +67,22 @@ function loginStatusChange(state=initialState, action) {
             var rtn = Object.assign({}, state, obj);
             return rtn;
         case LOG_OUT:
-            var obj = {login: false };
-            return Object.assign({}, state, obj);
+            // var obj = {login: false };
+            return Object.assign({}, initialState);
         case OVER_WRITE_ALL:
             var sub = {'name': action.all.name,
-                'profile': action.all.profile,
+                'profile': JSON.parse(action.all.profile),
                 'password': action.all.password,
-                'style':action.all.style}
-            console.log(sub);
-            return Object.assign({}, state, sub);
+                'style':JSON.parse(action.all.style)}
+            var rtn = Object.assign({}, state, sub);
+            console.log(rtn);
+            return rtn;
+        case ADD_PASSWORD:
+            var obj = {password: action.password};
+            return Object.assign({}, state, obj);
+        case ADD_USERNAME:
+            var obj = {name: action.name};
+            return Object.assign({}, state, obj);
         default:
             return state;
     }

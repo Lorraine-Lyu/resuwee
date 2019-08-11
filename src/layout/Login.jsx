@@ -3,7 +3,7 @@ import 'element-theme-default';
 import {connect} from 'react-redux';
 import API from '../api/api';
 import { Redirect } from 'react-router-dom'
-import {login, overWriteAll} from '../store/actions'
+import {login, addPassword, addUsername, editName, editRegion, editContact, editEducation, editDate, editWork, editEducationInfo} from '../store/actions'
 import {Card, Form, Input, Button} from 'element-react';
 
 function Login ({dispatch, profile, style}) {
@@ -33,12 +33,21 @@ function Login ({dispatch, profile, style}) {
                     "password":password,
                 }
             })
-            console.log(userData);
+            // console.log(userData);
             if (userData.status == 200) {
                 setWarn("");
+                var profile = JSON.parse(userData.data.profile);
+                // console.log(profile);
+                dispatch(editName(profile.name));
+                dispatch(editRegion(profile.region));
+                dispatch(editEducation(profile.education))
+                dispatch(editContact(profile.contact));
+                dispatch(editDate(new Date(profile.date)));
+                dispatch(editEducationInfo(profile.educationExperience));
+                dispatch(editWork(profile.workExperience));
+                // dispatch(overWriteAll(userData.data));
                 setBack(true);
                 dispatch(login());
-                dispatch(overWriteAll(userData.data));
             } else {
                 setWarn("user not found");
             }
@@ -46,13 +55,16 @@ function Login ({dispatch, profile, style}) {
             let userData = await API.post('/register', {
                     "name": name,
                     "password": password,
-                    "profile":profile,
-                    "style":style,
+                    "profile":JSON.stringify(profile),
+                    "style":JSON.stringify(style),
                 })
-            console.log(userData);
+            // console.log(userData);
             if (userData.status == 200) {
-                setWarn("");
+                setWarn("register succeeded");
                 setBack(true);
+                dispatch(login());
+            } else {
+                setWarn("registration failed, please contact developer")
             }
         }
         
@@ -66,11 +78,11 @@ function Login ({dispatch, profile, style}) {
             <Card className="login">
                 <Form>
                     <Form.Item label="userName: ">
-                        <Input onChange={e => setName(e)}>
+                        <Input onChange={e =>{ setName(e); dispatch(addUsername(e))}}>
                         </Input>
                     </Form.Item>
                     <Form.Item label="password:">
-                        <Input onChange={e => setPassword(e)}>
+                        <Input onChange={e => {setPassword(e);dispatch(addPassword(e))}}>
                         </Input>
                     </Form.Item>
                     <Button plain onClick={changeMode}>{text}</Button>
