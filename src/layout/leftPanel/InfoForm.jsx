@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import ContactList from './ContactList';
 import EducationInfo from './EducationInfo';
 import WorkExperience from './WorkExperience';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import API from '../../api/api';
 import {editName, editRegion, editDate, editEducation} from '../../store/actions';
 import { Button, Form, Input, Select, DatePicker, Dialog} from 'element-react';
 import 'element-theme-default';
 
-  const InfoForm = ({Name, Region, birthDate, Edu, dispatch, login, profile}) => {
+  const InfoForm = ({diapatch, Name, Region, birthDate, Edu, dispatch, login, profile}) => {
     const [name, setName] = useState(Name);
     const [region, setRegion] = useState(Region);
     const [date, setDate] = useState(birthDate);

@@ -4,14 +4,19 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import {Menu, Dialog, Button} from 'element-react';
 
-const NavBar = ({login, name}) => {
+const NavBar = ({dispatch, login, name}) => {
   const [needToLogin, setNeedToLogin] = useState(login);
   const [redirectToView, setRedirectToView] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [needToLogOut, setNeedToLogOut] = useState(false);
 
   function onSelect(e) {
-    if (e==="2-1" && !login) {
-      setNeedToLogin(!needToLogin);
+    if (e==="2-1" ) {
+      if (!login) { setNeedToLogin(!needToLogin) }
+      else {
+        setNeedToLogOut(true);
+        // setNeedToLogin(true);
+      }     
     } else if (e==='1') {
       if (needToLogin) {
         setNeedToLogin(true);
@@ -25,6 +30,8 @@ const NavBar = ({login, name}) => {
     return (<Redirect to="/login"></Redirect>)
   } else if (redirectToView) {
     return (<Redirect to={"/home/"+name} />)
+  } else if (needToLogOut) {
+    return (<Redirect to="/"></Redirect>)
   }
   return(
     <div>

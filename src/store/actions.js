@@ -9,6 +9,8 @@ export const EDIT_WORK = "EDIT WORK";
 export const LOG_IN = "LOG IN";
 export const LOG_OUT = "LOG OUT";
 export const OVER_WRITE_ALL = "OVER WRITE ALL";
+export const ADD_PASSWORD = "ADD PASSWORD";
+export const ADD_USERNAME = "ADD USERNAME";
 
 export function editName(text) {
     return {type: EDIT_NAME, text: text};
@@ -54,6 +56,10 @@ export function logout() {
     return {type: LOG_OUT};
 }
 
-// export function setPassword() {
-//     return {type: SET_PASSWORD};
-// }
+export function addPassword(password) {
+    return {type: ADD_PASSWORD, password};
+}
+
+export function addUsername(name) {
+    return {type: ADD_USERNAME, name};
+}
