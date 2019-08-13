@@ -60,9 +60,9 @@ function Login ({dispatch, profile, style}) {
                 })
             // console.log(userData);
             if (userData.status == 200) {
+                dispatch(login());
                 setWarn("register succeeded");
                 setBack(true);
-                dispatch(login());
             } else {
                 setWarn("registration failed, please contact developer")
             }

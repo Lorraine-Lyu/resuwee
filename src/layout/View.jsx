@@ -1,14 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux'
-import { Menu, Button} from 'element-react';
+import { Menu} from 'element-react';
+import API from '../api/api';
 import Bio from './rightPanel/Bio';
 import Edu from './rightPanel/Edu';
 import Work from './rightPanel/Work';
+import {editName, editContact, editDate, editEducation, editEducationInfo, editRegion, editWork} from '../store/actions'
 // import 'element-theme-default';
 
-function View(props, {user}) {
-    console.log(props.location.pathname);
+function View(props, {user, login, dispatch}) {
+  console.log(props.location.pathname);
+  var name = props.location.pathname.split("/")[-1];
+  if (!login) {
+    getData();
+  }
+  async function getData(){
+    let userData = await API.get('/view', {
+      params: {
+          "name": name,
+      }
+    })
+    if (userData.status == 200) {
+      var profile = userData.data;
+      dispatch(editName(profile.name));
+      dispatch(editRegion(profile.region));
+      dispatch(editEducation(profile.education))
+      dispatch(editContact(profile.contact));
+      dispatch(editDate(new Date(profile.date)));
+      dispatch(editEducationInfo(profile.educationExperience));
+      dispatch(editWork(profile.workExperience));
+    }
+  }
   const [page, setPage] = useState("bio"); //three states (bio, edu, work)
   var show;
   if (page === "bio") {
@@ -37,7 +60,8 @@ function View(props, {user}) {
 
 function mapStateToProps(state) {
   var user = state.updateUser.profile;
-  return {user};
+  var login = state.loginStatusChange.login;
+  return {user, login};
 }
 
 export default withRouter(connect(mapStateToProps)(View));
