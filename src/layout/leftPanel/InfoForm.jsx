@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import API from '../../api/api';
 import {editName, editRegion, editDate, editEducation} from '../../store/actions';
-import { Button, Form, Input, Select, DatePicker, Dialog} from 'element-react';
+import { Button, Form, Input, Select, DatePicker, Dialog, Message} from 'element-react';
 import 'element-theme-default';
 
   const InfoForm = ({Name, Region, birthDate, Edu, dispatch, login, profile, username, password}) => {
@@ -27,6 +27,16 @@ import 'element-theme-default';
           "profile": JSON.stringify(profile),
         });
         console.log(response);
+        if (response.status == 200 && response.data.affectedRows == 1) {
+          Message({
+            message: "Your profile has been updated.",
+            type: "success"});
+        } else {
+          Message({
+            message: 'Profile update failed',
+            type: 'warning'
+          });
+        }
       }
     }
 
