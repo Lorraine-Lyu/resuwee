@@ -101,6 +101,7 @@ function mapStateToProps(state) {
     var style = state.updateStyle.style;
     return {profile, style};
   }
+  
 
   //connect()(component) connects the component to the global state, which records all global variables 
 export default connect(mapStateToProps)(Login);
