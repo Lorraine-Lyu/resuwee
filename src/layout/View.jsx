@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 import { Menu, Message, Card} from 'element-react';
 import API from '../api/api';
 import Bio from './rightPanel/Bio';

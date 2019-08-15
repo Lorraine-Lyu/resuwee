@@ -9,11 +9,10 @@ class LeftPanel extends Component {
     }
   
     render() {
-      // console.log(this.props.profile);
       var person = this.props.profile;
       var update=this.props.upd;
       return(
-        <div className="LeftPanel">
+        <div >
             <InfoForm user={person}></InfoForm>
         </div>
       )
