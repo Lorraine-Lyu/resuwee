@@ -2,7 +2,7 @@ import axios from "axios";
 import { isError } from "util";
 
 export default axios.create({
-    baseURL: "http://localhost:3001/",
+    baseURL: "http://45.77.191.67:443/",
     responseType: "json"
   });
 

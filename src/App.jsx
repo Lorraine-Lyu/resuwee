@@ -40,10 +40,10 @@ class App extends Component {
         <div>
           <NavBar />
           <Layout.Col span='12'>
-            <LeftPanel/>
+            <LeftPanel className="LeftPanel"/>
           </Layout.Col>
           <Layout.Col span="12">
-            <RightPanel expandRight = {this.binded}/>
+            <RightPanel className="RightPanel" expandRight = {this.binded}/>
           </Layout.Col>
         </div>);
       }

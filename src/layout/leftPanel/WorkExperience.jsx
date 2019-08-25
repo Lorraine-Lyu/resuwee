@@ -45,13 +45,13 @@ const WorkExperience = ({works, dispatch}) => {
 
     if (!isOpen) {
         return (
-            <Form.Item label="从业经历 ">
+            <Form.Item label="Work Experience ">
               <Button type="primary small" onClick={switchState}>Expand</Button>
             </Form.Item>
         )
     }
     return(
-        <Form.Item label="从业经历 ">
+        <Form.Item label="Work Experience ">
             {toShow}
             <Button type="primary small" onClick={add}>Add</Button>
             <Button type="primary small" onClick={switchState}>Collapse</Button>
@@ -72,35 +72,35 @@ function WorkUnit(props){
 
     return(
         <div>
-        <Form.Item label="所在单位： ">
-          <Input placeholder="请输入所在单位名称" value={work.company} onChange={(e)=>onChange(e, 'company') } key={props.index+"place1"}></Input>
+        <Form.Item label="Company Name: ">
+          <Input placeholder="" value={work.company} onChange={(e)=>onChange(e, 'company') } key={props.index+"place1"}></Input>
         </Form.Item>
-        <Form.Item label="职位： ">
-          <Input placeholder="请输入职位名称" value={work.jobTitle} onChange={(e)=>onChange(e, 'jobTitle')} key={props.index+"position1"}></Input>
+        <Form.Item label="Job Title ">
+          <Input placeholder="" value={work.jobTitle} onChange={(e)=>onChange(e, 'jobTitle')} key={props.index+"position1"}></Input>
         </Form.Item>
-        <Form.Item label="时间： ">
-          <Layout.Col span="5">
+        <Form.Item label="Time Span ">
+          <Layout.Col span="3">
             <Form.Item labelWidth="0px">
               <DatePicker
                 value={work.startDate}
-                placeholder="选择开始日期"
+                placeholder="Start Date"
                 onChange={(e)=> onChange.bind(e, 'startDate')}
               />
             </Form.Item>
           </Layout.Col>
-          <Layout.Col className="line" span="1">-</Layout.Col>
-          <Layout.Col span="5">
+          <Layout.Col className="line" span="4">-</Layout.Col>
+          <Layout.Col span="3">
             <Form.Item labelWidth="0px">
               <DatePicker
                 value={work.endDate}
-                placeholder="选择结束日期"
+                placeholder="End Date"
                 onChange={(e)=>onChange.bind(e, 'endDate')}
               />
             </Form.Item>
             </Layout.Col>
           </Form.Item>
-        <Form.Item label="工作内容： ">
-          <Input placeholder="请输入主要工作职责描述"  value={work.description} onChange={(e)=> onChange(e, "desxription")}></Input>
+        <Form.Item label="Job Dscription ">
+          <Input placeholder=""  value={work.description} onChange={(e)=> onChange(e, "description")}></Input>
         </Form.Item>
         <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
       </div>

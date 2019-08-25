@@ -55,7 +55,7 @@ import { editContact } from '../../store/actions';
       if(!isOpen) {
         return(
           <div className="closedContact">
-            <Button type="primary small" onClick={switchState}>Expand</Button>
+            <Button type="primary mini" onClick={switchState}>Expand</Button>
           </div>
         )
       } else {
@@ -63,8 +63,8 @@ import { editContact } from '../../store/actions';
           <div>
             <div className="openedContactTitle">
               {input}
-              <Button type="primary small" onClick={add}>Add</Button>
-              <Button type="primary small" onClick={switchState}>Collapse</Button>
+              <Button type="plain mini" onClick={add}>Add</Button>
+              <Button type="primary mini" onClick={switchState}>Collapse</Button>
             </div>
           </div>
         )
