@@ -49,16 +49,16 @@ const EducationInfo = ({eduExp, dispatch}) => {
 
       if(!isOpen) {
           return(
-            <Form.Item label="学术经历 ">
-              <Button type="primary small" onClick={switchState}>Expand</Button>
+            <Form.Item label="Past Education ">
+              <Button type="primary mini" onClick={switchState}>Expand</Button>
             </Form.Item>
           )
       } else {
           return(
-              <Form.Item label="学术经历 ">
+              <Form.Item label="Past Education ">
                   {toShow}
-                  <Button type="primary small" onClick={add}>Add</Button>
-                  <Button type="primary small" onClick={switchState}>Collapse</Button>
+                  <Button type="plain mini" onClick={add}>Add</Button>
+                  <Button type="primary mini" onClick={switchState}>Collapse</Button>
               </Form.Item>
           )
       }
@@ -78,15 +78,15 @@ function EducationUnit (props) {
 
   return(
     <div>
-      <Form.Item label="所在学校： ">
+      <Form.Item label="School Name ">
         <Input placeholder="请输入就读学校名称" value={eduUnit.school} onChange={(e)=>onChange(e, 'school')}></Input>
       </Form.Item>
-      <Form.Item label="时间： ">
+      <Form.Item label="Time Span ">
         <Layout.Col span="5">
           <Form.Item labelWidth="0px">
             <DatePicker
               value={eduUnit.startDate}
-              placeholder="选择开始日期"
+              placeholder="start date"
               onChange={(e)=> onChange.bind(e, 'startDate')}
             />
           </Form.Item>
@@ -96,17 +96,17 @@ function EducationUnit (props) {
           <Form.Item labelWidth="0px">
             <DatePicker
               value={eduUnit.endDate}
-              placeholder="选择结束日期"
+              placeholder="end date"
               onChange={(e)=>onChange.bind(e, 'endDate')}
             />
           </Form.Item>
           </Layout.Col>
         </Form.Item>
-      <Form.Item label="专业： ">
-        <Input placeholder="请输入主要专业" value={eduUnit.major} onChange={(e)=> onChange(e, 'major')}></Input>
+      <Form.Item label="Major ">
+        <Input placeholder="" value={eduUnit.major} onChange={(e)=> onChange(e, 'major')}></Input>
       </Form.Item>
-      <Form.Item label="专业课程： ">
-        <Input placeholder="请输入主要学习课程"  value={eduUnit.courses} onChange={(e)=> onChange(e, "courses")}></Input>
+      <Form.Item label="Key Courses ">
+        <Input placeholder=""  value={eduUnit.courses} onChange={(e)=> onChange(e, "courses")}></Input>
       </Form.Item>
       <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
     </div>

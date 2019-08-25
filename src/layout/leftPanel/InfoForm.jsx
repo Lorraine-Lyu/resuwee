@@ -46,33 +46,32 @@ import 'element-theme-default';
 
       return (
         <Form labelWidth="70">
-          <Form.Item label="姓名 ">
-            <Input value={name} placeholder="请输入您的姓名" onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
+          <Form.Item label="Name ">
+            <Input value={name} placeholder="Please input your name" onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
           </Form.Item>
-          <Form.Item label="所在地 ">
+          <Form.Item label="Region ">
             <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion(e))}}>
-              <Select.Option label="上海" value="shanghai"></Select.Option>
-              <Select.Option label="北京" value="beijing"></Select.Option>
+              <Select.Option label="Shanghai" value="shanghai"></Select.Option>
+              <Select.Option label="Beijing" value="beijing"></Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="出生年月 ">
+          <Form.Item label="Birthdate ">
               <DatePicker
                   value={date}
-                  placeholder="选择日期"
+                  placeholder="PLease choose month and year"
                   onChange={(e)=> {setDate(e); dispatch(editDate(e))}}
                 />
           </Form.Item>
           <Form.Item label="学历 ">
             <Select value={edu} placeholder="请选择您的最高学历" onChange={(e)=>{setEdu(e); dispatch(editEducation(e))}}>
-              <Select.Option label="初中" value="初中"></Select.Option>
-              <Select.Option label="高中" value="高中"></Select.Option>
-              <Select.Option label="本科" value="本科"></Select.Option>
-              <Select.Option label="研究生" value="研究生"></Select.Option>
-              <Select.Option label="硕士" value="硕士"></Select.Option>
-              <Select.Option label="博士及以上" value="博士及以上"></Select.Option>
+              <Select.Option label="Junor High" value="Junor High"></Select.Option>
+              <Select.Option label="Senior High" value="Senior High"></Select.Option>
+              <Select.Option label="Bachelor" value="Bachelor"></Select.Option>
+              <Select.Option label="Master" value="Master"></Select.Option>
+              <Select.Option label="phD or higher" value="phD or higher"></Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="联系方式 ">
+          <Form.Item label="Contact ">
             <ContactList></ContactList>
           </Form.Item>
           <EducationInfo></EducationInfo>
@@ -93,8 +92,8 @@ import 'element-theme-default';
             </Dialog.Footer>
           </Dialog>
           <Form.Item>
-            <Button type="primary" onClick={submitEdit}>立即创建</Button>
-            <Button>取消</Button>
+            <Button type="primary" onClick={submitEdit}>Deploy my Webpage</Button>
+            <Button>Cancel</Button>
           </Form.Item>
         </Form>
       )

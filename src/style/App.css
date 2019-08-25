@@ -49,7 +49,7 @@
 .nav-link {
   float: right;
   color: #FFFFFF !important;
-  font-size: 18px ;
+  font-size: 21px ;
   padding-top: 21px;
   padding-bottom: 11px;
   font-family: 'Thasadith', sans-serif;
@@ -69,7 +69,7 @@
   color: #FA7268 !important;
 }
 .LeftPanel {
-  /* margin: 20px; */
+  margin: 30px;
   padding:10px;
   float:left;
   resize: horizontal;

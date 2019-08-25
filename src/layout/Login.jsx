@@ -14,6 +14,7 @@ function Login ({dispatch, profile, style}) {
     const [text, setText] = useState("Don't have an account"); //the text on transition button which trigger the switch between "login" and "register"
     const [back, setBack] = useState(false); //the variable recording whether user want to return to homepage
     const [warn, setWarn] = useState("");
+    var userData;
     function changeMode() {
         if (mode === "login") {
             setMode("register");
@@ -26,15 +27,22 @@ function Login ({dispatch, profile, style}) {
 
     async function validateLogin() {  
             // Load async data.
+        
         if (mode === "login") {
-            let userData = await API.get('/login', {
-                params: {
-                    "name": name,
-                    "password":password,
-                }
-            })
+            try {
+                userData = await API.get('/login', {
+                    params: {
+                        "name": name,
+                        "password":password,
+                    }
+                })
+            }
+        catch(e) {
+            console.log(e);
+        }
+      
             // console.log(userData);
-            if (userData.status == 200) {
+            if (userData!=null && userData.status == 200) {
                 setWarn("");
                 var profile = JSON.parse(userData.data.profile);
                 // console.log(profile);
@@ -52,14 +60,18 @@ function Login ({dispatch, profile, style}) {
                 setWarn("user not found");
             }
         } else {
-            let userData = await API.post('/register', {
+            try {
+                userData = await API.post('/register', {
                     "name": name,
                     "password": password,
                     "profile":JSON.stringify(profile),
                     "style":JSON.stringify(style),
                 })
-            // console.log(userData);
-            if (userData.status == 200) {
+            } catch(e) {
+                console.log(e);
+            }
+            
+            if (userData!= null&&userData.status == 200) {
                 dispatch(login());
                 setWarn("register succeeded");
                 setBack(true);

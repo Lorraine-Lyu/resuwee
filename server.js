@@ -8,10 +8,6 @@ app.get('/home', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.get('/login', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 app.listen(80, function(){
   console.log('server running at localhost:80');
 });
