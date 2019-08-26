@@ -7,6 +7,7 @@ import {login, addPassword, addUsername, editName, editRegion, editContact, edit
 import {Card, Form, Input, Button} from 'element-react';
 
 function Login ({dispatch, profile, style}) {
+    let bio = profile;
     //register state variable, check react hook for detail
     const [mode, setMode] = useState("login"); //record the current mode (login or register)
     const [name, setName] = useState("");
@@ -41,9 +42,10 @@ function Login ({dispatch, profile, style}) {
             console.log(e);
         }
       
-            // console.log(userData);
+            console.log(userData);
             if (userData!=null && userData.status == 200) {
                 setWarn("");
+                setBack(true);
                 var profile = JSON.parse(userData.data.profile);
                 // console.log(profile);
                 dispatch(editName(profile.name));
@@ -54,34 +56,35 @@ function Login ({dispatch, profile, style}) {
                 dispatch(editEducationInfo(profile.educationExperience));
                 dispatch(editWork(profile.workExperience));
                 // dispatch(overWriteAll(userData.data));
-                setBack(true);
                 dispatch(login());
             } else {
                 setWarn("user not found");
             }
         } else {
             try {
+                console.log(bio);
                 userData = await API.post('/register', {
                     "name": name,
                     "password": password,
-                    "profile":JSON.stringify(profile),
+                    "profile":JSON.stringify(bio),
                     "style":JSON.stringify(style),
                 })
             } catch(e) {
                 console.log(e);
             }
-            
+            console.log(userData);
             if (userData!= null&&userData.status == 200) {
+                console.log("here");
+                setBack(true);
                 dispatch(login());
                 setWarn("register succeeded");
-                setBack(true);
             } else {
                 setWarn("registration failed, please contact developer")
             }
         }
         
     }
-
+    console.log(back);
     if (back) {
         return <Redirect to="/"/>
     }
