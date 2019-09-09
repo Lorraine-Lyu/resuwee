@@ -13,10 +13,10 @@ const Bio = ({name, region, date, education}) => {
     return(
         <div>
             <Card>
-                <div>name: {userName}</div>
+                <div>My name is {userName}</div>
                 {/* <div>birthday: {userDate}</div> */}
-                <div>region: {userRegion}</div>
-                <div>education: {userEdu}</div>
+                <div>I currently live in {userRegion}</div>
+                <div>Education: {userEdu}</div>
             </Card>
             <Contacts></Contacts>
         </div>

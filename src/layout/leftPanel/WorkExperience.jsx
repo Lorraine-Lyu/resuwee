@@ -51,9 +51,9 @@ const WorkExperience = ({works, dispatch}) => {
         )
     }
     return(
-        <Form.Item label="Work Experience ">
+        <Form.Item label="Work Experience " className="left-modules">
             {toShow}
-            <Button type="primary small" onClick={add}>Add</Button>
+            <Button type="plain small" onClick={add}>Add</Button>
             <Button type="primary small" onClick={switchState}>Collapse</Button>
         </Form.Item>
     )
@@ -71,7 +71,7 @@ function WorkUnit(props){
     }
 
     return(
-        <div>
+        <div className="WorkUnit">
         <Form.Item label="Company Name: ">
           <Input placeholder="" value={work.company} onChange={(e)=>onChange(e, 'company') } key={props.index+"place1"}></Input>
         </Form.Item>
@@ -82,6 +82,8 @@ function WorkUnit(props){
           <Layout.Col span="3">
             <Form.Item labelWidth="0px">
               <DatePicker
+                className="time-span"
+                selectionMode="month"
                 value={work.startDate}
                 placeholder="Start Date"
                 onChange={(e)=> onChange.bind(e, 'startDate')}
@@ -92,6 +94,8 @@ function WorkUnit(props){
           <Layout.Col span="3">
             <Form.Item labelWidth="0px">
               <DatePicker
+                className="time-span"
+                selectionMode="month"
                 value={work.endDate}
                 placeholder="End Date"
                 onChange={(e)=>onChange.bind(e, 'endDate')}
@@ -99,7 +103,7 @@ function WorkUnit(props){
             </Form.Item>
             </Layout.Col>
           </Form.Item>
-        <Form.Item label="Job Dscription ">
+        <Form.Item label="Job Dscription " className="job-description">
           <Input placeholder=""  value={work.description} onChange={(e)=> onChange(e, "description")}></Input>
         </Form.Item>
         <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>
