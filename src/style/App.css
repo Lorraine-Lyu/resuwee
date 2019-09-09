@@ -1,35 +1,46 @@
-/* .App {
-  text-align: center;
+.el-form-item{
+  margin: 10px !important;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.el-input__inner{
+  width: 80%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.el-input .el-date-editor{
+  width: 80px !important;
 }
 
-.App-link {
-  color: #61dafb;
+.el-button:focus, .el-button:hover {
+  color: #FA7268 !important;
+  border-color: #FA7268 !important;
+  background-color: #FFFFFF !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.el-button--primary {
+  background-color: #FA7268 !important;
+  border-color: #FA7268 !important;
+  color: #FFFFFF !important;
+}
+
+.el-button--text {
+  margin-top: 10px !important;
+  color: red !important;
+}
+
+.el-menu-item.is-active {
+  color: #FA7268 !important;
+}
+
+.el-menu--horizontal>.el-menu-item:hover {
+  background-color: #000000 !important;
+  color: #FA7268 !important;
+  border-bottom: 5px solid #FA7268 !important;
+}
+.el-menu--dark {
+  background-color: #000000 !important;
+  color: #FA7268 !important;
+}
+
 .topNav {
   height: 60px;
 }
@@ -37,10 +48,15 @@
   background-color: #000000 !important;
 }
 
+.left-modules {
+  padding: 10px;
+  border-bottom: 1px solid lightgray !important;
+}
+
 .navbar-brand {
   float: left;
   height: 59px;
-  width: 100px;
+  width: 180px;
   padding-top: 18px;
   padding-left: 18px;
   color: #ffffff !important;
@@ -69,54 +85,32 @@
   color: #FA7268 !important;
 }
 .LeftPanel {
-  margin: 30px;
+  margin: 20px;
+  margin-right: 0px;
   padding:10px;
   float:left;
-  resize: horizontal;
-  overflow: auto;
-  min-width: 300px;
-  border-radius: 2px;
+  height: 88vh;
+  /* resize: horizontal; */
+  overflow-y: scroll;
+  /* min-width: 300px; */
+  border: 1px #FA7268 solid;
+  border-radius: 4px;
 }
 .RightPanel {
-  /* margin: 20px; */
-  padding:10px;
+  margin: 20px;
+  margin-left: 0px;
+  /* padding:10px; */
   /* float:right; */
+  height: 88vh;
   resize: horizontal;
-  overflow: auto;
-  min-width: 300px;
-  border-radius: 2px;
+  overflow-y: scroll;
+  /* min-width: 300px; */
+  border: 1px lightgray solid;
 } 
 
-p {
-  height: 100%;
-}
-
-/* i {
-  float:left;
-  display: inline-block;
-  padding: 3px;
-} */
-
-.triangle-left {
-  margin: auto;
-	width: 10px;
-	height: 30px;
-  background-color: #333333;
-  float: left;
-  margin-top: 30px;
-	/* border-top: 20px solid transparent;
-	border-right: 15px solid #333333;
-	border-bottom: 20px solid transparent; */
-}
-
-.triangle-right {
-	width: 10px;
-	height: 30px;
-  float: right;
-  background-color: #333333;
-	/* border-top: 20px solid transparent;
-	border-left: 15px solid #333333;
-	border-bottom: 20px solid transparent; */
+.right-panel-body {
+  margin: 10px 20px;
+  background-color: azure;
 }
 
 .expanded {
@@ -125,18 +119,41 @@ p {
   /* border: 1px black solid; */
 }
 
-.ContactList {
-  border: 1px black solid;
+.contact-div {
+  margin: 40px;
+  /* border: 1px black solid; */
+  position: absolute;
 }
 
-::-webkit-scrollbar-track
+/* .WorkUnit {
+  border-bottom: 1px #FA7268 solid;
+  border-right: 1px #FA7268 solid;
+  border-radius: 4px;
+  padding: 5px;
+} */
+
+.job-description{
+  width: 88%;
+  float : left;
+}
+
+.contact-link{
+  width: 88%;
+  float : left;
+}
+
+.courses{
+  width: 88%;
+  float : left;
+}
+/* ::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #F5F5F5;
     border-radius: 10px;
-}
+} */
 
-::-webkit-scrollbar
+/* ::-webkit-scrollbar
 {
     width: 10px;
     background-color: #F5F5F5;
@@ -151,4 +168,4 @@ p {
                                        color-stop(0.44, rgb(122,153,217)),
                                        color-stop(0.72, rgb(73,125,189)),
                                        color-stop(0.86, rgb(28,58,148)));
-}
+} */

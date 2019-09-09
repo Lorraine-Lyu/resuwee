@@ -29,11 +29,13 @@ function RightPanel(props, {user}) {
     return(
       <div className = "RightPanel">
           <Menu theme="dark" defaultActive="1" className="el-menu-demo" mode="horizontal" onSelect={onSelect.bind(this)}>
-            <Menu.Item index="bio">基础信息</Menu.Item>
-            <Menu.Item index="edu">学术经历</Menu.Item>
-            <Menu.Item index="work">就业经历</Menu.Item>
+            <Menu.Item index="bio">Basic Info</Menu.Item>
+            <Menu.Item index="edu">Education</Menu.Item>
+            <Menu.Item index="work">Work Experience</Menu.Item>
           </Menu>
-          {show}
+          <div className="right-panel-body">
+            {show}
+          </div>
           <CollapseBtn expandRight = {props.expandRight}/>
       </div>
     )

@@ -55,7 +55,7 @@ const EducationInfo = ({eduExp, dispatch}) => {
           )
       } else {
           return(
-              <Form.Item label="Past Education ">
+              <Form.Item label="Past Education " className="left-modules">
                   {toShow}
                   <Button type="plain mini" onClick={add}>Add</Button>
                   <Button type="primary mini" onClick={switchState}>Collapse</Button>
@@ -85,6 +85,7 @@ function EducationUnit (props) {
         <Layout.Col span="5">
           <Form.Item labelWidth="0px">
             <DatePicker
+              selectionMode="month"
               value={eduUnit.startDate}
               placeholder="start date"
               onChange={(e)=> onChange.bind(e, 'startDate')}
@@ -95,6 +96,7 @@ function EducationUnit (props) {
         <Layout.Col span="5">
           <Form.Item labelWidth="0px">
             <DatePicker
+              selectionMode="month"
               value={eduUnit.endDate}
               placeholder="end date"
               onChange={(e)=>onChange.bind(e, 'endDate')}
@@ -105,7 +107,7 @@ function EducationUnit (props) {
       <Form.Item label="Major ">
         <Input placeholder="" value={eduUnit.major} onChange={(e)=> onChange(e, 'major')}></Input>
       </Form.Item>
-      <Form.Item label="Key Courses ">
+      <Form.Item label="Key Courses " className="courses">
         <Input placeholder=""  value={eduUnit.courses} onChange={(e)=> onChange(e, "courses")}></Input>
       </Form.Item>
       <Button type="text" icon="delete" onClick={() => {remove(index)}}></Button>

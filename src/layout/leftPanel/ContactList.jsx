@@ -60,7 +60,7 @@ import { editContact } from '../../store/actions';
         )
       } else {
         return (
-          <div>
+          <div className="left-modules">
             <div className="openedContactTitle">
               {input}
               <Button type="plain mini" onClick={add}>Add</Button>
@@ -93,7 +93,7 @@ import { editContact } from '../../store/actions';
           <Form.Item className="contactUnit" key={curr+'div'}>
             {select} 
           </Form.Item>
-          <Form.Item label="link: ">
+          <Form.Item label="link: " className="contact-link">
             <Input type="text" className="contactInput" key={curr+'input'} value={props.value.link} onChange={e => update(curr, 'value', e)}></Input>
           </Form.Item>
           <Button type="text" icon="delete" onClick={()=>remove(index)}></Button>

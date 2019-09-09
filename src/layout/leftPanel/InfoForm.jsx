@@ -45,25 +45,29 @@ import 'element-theme-default';
     }
 
       return (
-        <Form labelWidth="70">
+        <Form labelWidth="90">
           <Form.Item label="Name ">
             <Input value={name} placeholder="Please input your name" onChange={(e)=> {setName(e); dispatch(editName(e));}}></Input>
           </Form.Item>
           <Form.Item label="Region ">
-            <Select placeholder="请选择活动区域" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion(e))}}>
-              <Select.Option label="Shanghai" value="shanghai"></Select.Option>
-              <Select.Option label="Beijing" value="beijing"></Select.Option>
+            <Select placeholder="The Earth" value={region} onChange={(e)=> {setRegion(e); dispatch(editRegion(e))}}>
+              <Select.Option label="Shanghai" value="Shanghai"></Select.Option>
+              <Select.Option label="Beijing" value="Beijing"></Select.Option>
+              <Select.Option label="Guangdong" value="Guangdong"></Select.Option>
+              <Select.Option label="Bay Area" value="Bay Area"></Select.Option>
+              <Select.Option label="East Coast" value="East Coast"></Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Birthdate ">
               <DatePicker
+                  selectionMode="month"
                   value={date}
                   placeholder="PLease choose month and year"
                   onChange={(e)=> {setDate(e); dispatch(editDate(e))}}
                 />
           </Form.Item>
-          <Form.Item label="学历 ">
-            <Select value={edu} placeholder="请选择您的最高学历" onChange={(e)=>{setEdu(e); dispatch(editEducation(e))}}>
+          <Form.Item label="Education ">
+            <Select value={edu} placeholder="Please input your highest education level" onChange={(e)=>{setEdu(e); dispatch(editEducation(e))}}>
               <Select.Option label="Junor High" value="Junor High"></Select.Option>
               <Select.Option label="Senior High" value="Senior High"></Select.Option>
               <Select.Option label="Bachelor" value="Bachelor"></Select.Option>

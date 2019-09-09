@@ -24,14 +24,12 @@ class App extends Component {
   };
 
   render() {
-    // console.log(this.state.user);
-      const newContent = "This is the expanded right panel";
       if(this.state.rightIsExpanded){
         return(
         <div>
           <NavBar />
           <Layout.Col span='24'>
-            <RightPanel className = "expanded" content = {newContent} expandRight = {this.binded}/>  
+            <RightPanel className = "expanded" expandRight = {this.binded}/>  
           </Layout.Col>
           
         </div>);

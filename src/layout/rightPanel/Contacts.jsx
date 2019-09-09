@@ -6,7 +6,7 @@ import 'element-theme-default';
 const Contacts = ({contactLst}) => {
     const toShow = contactLst.map((c) => {return <Button key={c.index}>{c.name}</Button>})
     return (
-        <Layout.Row gutter="20" className="contactDiv">
+        <Layout.Row gutter="20" className="contact-div">
             <Layout.Col span="12" offset="6">
                 {toShow}
             </Layout.Col>
