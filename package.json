@@ -9,7 +9,7 @@
     "element-react": "^1.4.34",
     "element-theme-default": "^1.4.13",
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "mysql": "^2.17.1",
     "popper.js": "^1.15.0",
