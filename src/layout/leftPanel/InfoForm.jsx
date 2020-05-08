@@ -9,7 +9,13 @@ import {editName, editRegion, editDate, editEducation} from '../../store/actions
 import { Button, Form, Input, Select, DatePicker, Dialog, Message} from 'element-react';
 import 'element-theme-default';
 
+// the component in the left panel containing all input text areas.
+// the input (i.e. name, region, birthdate etc. ) are provided by redux(the global variable manager) before InfoForm is rendered, see the bottom of the file
   const InfoForm = ({Name, Region, birthDate, Edu, dispatch, login, profile, username, password}) => {
+    
+    //React Hook demo
+    //all variables here are local variables, their status are monitored by react
+    //once one of their value is changed, the entire info form is re-rendered
     const [name, setName] = useState(Name);
     const [region, setRegion] = useState(Region);
     const [date, setDate] = useState(birthDate);
@@ -17,6 +23,9 @@ import 'element-theme-default';
     const [dialogVisible, setDialogVisible] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
+    //API Demo
+    //When the user clicked "Deploy My Webpage"
+    //send request to backend server to update user's data
     async function submitEdit() {
       if(!login) {
         setDialogVisible(true);
@@ -40,10 +49,17 @@ import 'element-theme-default';
       }
     }
 
+    //Router Demo
+    //redirect to the login page if the login button is selected
     if (redirect) {
       return <Redirect to="/login" />
     }
 
+    // The actual definition for infoForm component
+    // The html <InfoForm props1=xxx props2=xxx><\InfoForm> actually refers to the code below
+    // include all html (capsulated by react) sub-components in Infoform
+    // The compoennt <From>, <Select>, <Dialog>, <Button>, <DatePicker> are imported from Element Ui react library
+    // The component <ContactList> <EducationInfo> <WorkExperience> are defined in the same directory
       return (
         <Form labelWidth="90">
           <Form.Item label="Name ">
@@ -76,7 +92,7 @@ import 'element-theme-default';
             </Select>
           </Form.Item>
           <Form.Item label="Contact ">
-            <ContactList></ContactList>
+            <ContactList></ContactList> 
           </Form.Item>
           <EducationInfo></EducationInfo>
           <WorkExperience></WorkExperience>
@@ -103,6 +119,11 @@ import 'element-theme-default';
       )
   }
 
+  //Redux demo:
+  // before the element (InfoForm) is rendered, it needs to get user's info from the 
+  // global state, this function retrieves all information from the global state 
+  // and map it to the argument in the constuctor of InfoForm.
+  // @arg state: the global state passed in by redux(not sure)
   function mapStateToProps(state) {
     var user = state.updateUser.profile;
     var login = state.loginStatusChange.login;
@@ -120,4 +141,5 @@ import 'element-theme-default';
       }
   }
 
+  //for redux: connect Infoform to redux global state manager
   export default connect(mapStateToProps)(InfoForm);
