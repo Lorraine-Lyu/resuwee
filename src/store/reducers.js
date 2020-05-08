@@ -7,6 +7,7 @@ const initialState = {
     login: false,
     name: "", //this is the username 
     password: "", 
+    path: "",
     profile: {
         name: '', //this is user's real name
         date: new Date(0),
